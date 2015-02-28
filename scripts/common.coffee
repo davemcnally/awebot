@@ -11,3 +11,6 @@ module.exports = (robot) ->
 
     robot.respond /social$/i, (msg) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
+
+    robot.respond /commands$/i, (msg) ->
+        msg.send "I currently have a few commands you can use: !schedule, !social and !ctt/!tweet can be used by anyone. We also have !shoutout which is reserved for mods only."
