@@ -4,5 +4,5 @@
 #   hubot testing — outputs test response
 
 module.exports = (robot) ->
-    robot.respond /testing/i, (msg) ->
+    robot.respond /testing$/i, (msg) ->
         msg.send "I’m alive!"
