@@ -1,1 +1,1 @@
-web: bin/hubot -a irc -n awebot
+web: bin/hubot -a irc --name awebot --alias '!'
