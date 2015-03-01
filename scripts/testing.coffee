@@ -1,8 +1,11 @@
 # Just a test script for testing custom commands
 #
 # Command(s):
-#   hubot testing — outputs test response
+#   hubot ding — outputs test response
 
 module.exports = (robot) ->
-    robot.respond /testing$/i, (msg) ->
-        msg.send "I’m alive and well!"
+    robot.respond /ding$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            msg.send "DONG!"
+        else
+            msg.send "Sorry #{msg.envelope.user.name}, only Masonest can do that."
