@@ -4,6 +4,7 @@
 # Command(s):
 #   hubot schedule    — Return the current stream schedule
 #   hubot social      — Links to Twitter and Facebook
+#   hubot commands    - Shows a current list of commands
 
 module.exports = (robot) ->
     robot.respond /schedule$/i, (msg) ->
@@ -13,4 +14,4 @@ module.exports = (robot) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
 
     robot.respond /commands$/i, (msg) ->
-        msg.send "I currently have a few commands you can use: !schedule, !social and !ctt/!tweet can be used by anyone. We also have !shoutout which is reserved for mods only."
+        msg.send "I currently have a few commands you can use: !schedule, !social and !ctt/!tweet can be used by anyone."
