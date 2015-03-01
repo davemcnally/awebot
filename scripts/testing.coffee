@@ -5,4 +5,4 @@
 
 module.exports = (robot) ->
     robot.respond /testing$/i, (msg) ->
-        msg.send "I’m alive!"
+        msg.send "I’m alive and well!"
