@@ -82,10 +82,13 @@ module.exports = (robot) ->
 
         msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
-    robot.respond /chatters$/i, (msg) ->
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
-            .get() (err, res, body) ->
-                chat = JSON.parse(body)
-                chatters = if [chat.chatters.moderators, chat.chatters.viewers] then "Current chatters: #{chat.chatters.moderators} #{chat.chatters.viewers}." else "Whoops, try again."
-                msg.send "#{chatters}"
+    robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
+        .get() (err, res, body) ->
+            chat = JSON.parse(body)
+            people = [chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]
+            timerId = setInterval(timerMethod, 10000)
 
+            timerMethod = ->
+                for person in people
+                    points =+ 5
+                return
