@@ -86,9 +86,10 @@ module.exports = (robot) ->
         .get() (err, res, body) ->
             chat = JSON.parse(body)
             people = [chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]
+            merged = merged.concat.apply(merged, people)
 
             setInterval(->
-                for username in people
+                for username in merged
                     points[username] += 5
                     return
             , 10000)
