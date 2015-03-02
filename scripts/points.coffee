@@ -86,6 +86,6 @@ module.exports = (robot) ->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
             .get() (err, res, body) ->
                 chat = JSON.parse(body)
-                chatters = if chat.moderators then "Current chatters: #{chat.chatters}." else "Whoops, try again."
+                chatters = if chat.chatters then "Current chatters: #{chat.chatters}." else "Whoops, try again."
                 msg.send "#{chatters}"
 
