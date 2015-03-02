@@ -97,7 +97,7 @@ module.exports = (robot) ->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
             .get() (err, res, body) ->
                 chat = JSON.parse(body)
-                people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
+                people = flattened([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
                 for username in people
                     points[username] += 5
