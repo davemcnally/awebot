@@ -86,9 +86,9 @@ module.exports = (robot) ->
         .get() (err, res, body) ->
             chat = JSON.parse(body)
             people = [chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]
-            timerMethod = setInterval(10000)
 
-            timerMethod = ->
+            setInterval(->
                 for username in people
-                    points =+ 5
+                    points[username] += 5
                     return
+            , 10000)
