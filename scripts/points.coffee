@@ -101,4 +101,4 @@ module.exports = (robot) ->
             for username in people
                 points[username] ?= 0
                 points[username] += 5
-    ), 10000
+    ), 60000
