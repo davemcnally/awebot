@@ -86,8 +86,8 @@ module.exports = (robot) ->
         .get() (err, res, body) ->
             chat = JSON.parse(body)
             people = [chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]
-            merged = []
-            merged = merged.concat.apply(merged, people)
+            flatten = (people) ->
+                merged::concat.apply([], people)
 
             setInterval(->
                 for username in merged
