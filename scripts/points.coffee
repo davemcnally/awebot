@@ -72,7 +72,7 @@ module.exports = (robot) ->
         msg.send username + ' Has ' + points[username] + ' Points'
 
     robot.respond /points$/i, (msg) ->
-        username = #{msg.envelope.user.name}
+        username = "#{msg.envelope.user.name}"
         points[username] ?= 0
 
         msg.send "You have " + points[username] + " points!"
