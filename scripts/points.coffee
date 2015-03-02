@@ -89,6 +89,6 @@ module.exports = (robot) ->
             timerId = setInterval(timerMethod, 10000)
 
             timerMethod = ->
-                for person in people
-                    points[person] =+ 5
+                for username in people
+                    points[username] =+ 5
                 return
