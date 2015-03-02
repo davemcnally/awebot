@@ -14,17 +14,17 @@
 #   brettlangdon
 
 points = {}
-# flatten = (array) ->
-#     Array::concat.apply([], array)
+flatten = (array) ->
+    Array::concat.apply([], array)
 
-exports.flatten = flatten = (array) ->
-    flattened = []
-    for element in array
-        if element instanceof Array
-            flattened = flattened.concat flatten element
-        else
-            flattened.push element
-    flattened
+# exports.flatten = flatten = (array) ->
+#     flattened = []
+#     for element in array
+#         if element instanceof Array
+#             flattened = flattened.concat flatten element
+#         else
+#             flattened.push element
+#     flattened
 
 award_points = (msg, username, pts) ->
     points[username] ?= 0
@@ -97,7 +97,7 @@ module.exports = (robot) ->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
             .get() (err, res, body) ->
                 chat = JSON.parse(body)
-                people = flattened([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
+                people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
                 for username in people
                     points[username] += 5
