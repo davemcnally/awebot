@@ -14,6 +14,8 @@
 #   brettlangdon
 
 points = {}
+flatten = (array) ->
+    Array::concat.apply([], array)
 
 award_points = (msg, username, pts) ->
     points[username] ?= 0
@@ -85,9 +87,7 @@ module.exports = (robot) ->
     robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
         .get() (err, res, body) ->
             chat = JSON.parse(body)
-            people = [chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]
-            flatten = (people) ->
-                people::concat.apply([], people)
+            people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers], array)
 
             setInterval(->
                 for username in people
