@@ -1,22 +1,16 @@
-# Description:
-#   Give, Take and List User Points
+# A basic points system to build
+# points over time. Can also be manually
+# awarded.
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
-# Commands:
-#   hubot give <number> points to <username> - award <number> points to <username>
-#   hubot give <username> <number> points - award <number> points to <username>
-#   hubot take <number> points from <username> - take away <number> points from <username>
+# Command(s):
+#   hubot give <number> points to <username>    - award <number> points to <username>
+#   hubot give <username> <number> points       - award <number> points to <username>
+#   hubot take <number> points from <username>  - take away <number> points from <username>
 #   hubot how many points does <username> have? - list how many points <username> has
-#   hubot take all points from <username> - removes all points from <username>
+#   hubot take all points from <username>       - removes all points from <username>
 #
-# Author:
+# Original Author:
 #   brettlangdon
-#
 
 points = {}
 
@@ -76,4 +70,10 @@ module.exports = (robot) ->
         points[username] ?= 0
 
         msg.send username + ' Has ' + points[username] + ' Points'
+
+    robot.respond /points$/i, (msg) ->
+        username = #{msg.envelope.user.name}
+        points[username] ?= 0
+
+        msg.send "You have " + points[username] + " points!"
 
