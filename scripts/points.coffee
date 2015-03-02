@@ -3,11 +3,12 @@
 # awarded.
 #
 # Command(s):
-#   hubot give <number> points to <username>    - award <number> points to <username>
-#   hubot give <username> <number> points       - award <number> points to <username>
-#   hubot take <number> points from <username>  - take away <number> points from <username>
-#   hubot how many points does <username> have? - list how many points <username> has
-#   hubot take all points from <username>       - removes all points from <username>
+#   hubot give <number> points to <username>    - Award <number> points to <username>
+#   hubot give <username> <number> points       - Award <number> points to <username>
+#   hubot take <number> points from <username>  - Take away <number> points from <username>
+#   hubot points                                - See how many points you have
+#   hubot points <username>                     - See how many points <username> has
+#   hubot take all points from <username>       - Removes all points from <username>
 #
 # Original Author:
 #   brettlangdon
@@ -65,11 +66,15 @@ module.exports = (robot) ->
             return
         msg.send "Don't be so mean, #{msg.envelope.user.name}!"
 
-    robot.respond /how many points does (.*?) have\??/i, (msg) ->
-        username = msg.match[1]
-        points[username] ?= 0
+    robot.respond /points ([a-zA-Z0-9_]*)/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            username = msg.match[1]
+            points[username] ?= 0
 
-        msg.send username + ' Has ' + points[username] + ' Points'
+            msg.send username + ' has ' + points[username] + ' points!'
+            return
+
+        msg.send "Only mods can check the points of others!"
 
     robot.respond /points$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
