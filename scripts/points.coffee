@@ -80,5 +80,5 @@ module.exports = (robot) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
 
-        msg.send "You have " + points[username] + " points!"
+        msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
