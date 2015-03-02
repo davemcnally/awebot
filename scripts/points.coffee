@@ -90,7 +90,7 @@ module.exports = (robot) ->
                 merged::concat.apply([], people)
 
             setInterval(->
-                for username in merged
+                for username in people
                     points[username] += 5
                     return
             , 10000)
