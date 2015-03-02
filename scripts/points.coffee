@@ -90,5 +90,5 @@ module.exports = (robot) ->
 
             timerMethod = ->
                 for person in people
-                    points =+ 5
+                    points[person] =+ 5
                 return
