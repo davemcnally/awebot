@@ -14,8 +14,17 @@
 #   brettlangdon
 
 points = {}
-flatten = (array) ->
-    Array::concat.apply([], array)
+# flatten = (array) ->
+#     Array::concat.apply([], array)
+
+exports.flatten = flatten = (array) ->
+    flattened = []
+    for element in array
+        if element instanceof Array
+            flattened = flattened.concat flatten element
+        else
+            flattened.push element
+    flattened
 
 award_points = (msg, username, pts) ->
     points[username] ?= 0
@@ -93,4 +102,4 @@ module.exports = (robot) ->
                 for username in people
                     points[username] += 5
                     return
-    , 30000)
+    , 10000)
