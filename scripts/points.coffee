@@ -100,6 +100,7 @@ module.exports = (robot) ->
                 people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
                 for username in people
+                    points[username] ?= 0
                     points[username] += 5
                     return
     , 10000)
