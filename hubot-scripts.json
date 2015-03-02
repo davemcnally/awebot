@@ -1,4 +1,3 @@
 [
-  "redis-brain.coffee",
-  "points.coffee"
+  "redis-brain.coffee"
 ]
