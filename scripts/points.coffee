@@ -93,14 +93,12 @@ module.exports = (robot) ->
 
         msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
-    setInterval(->
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
-            .get() (err, res, body) ->
-                chat = JSON.parse(body)
-                people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
+    setInterval (->
+        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
+            chat = JSON.parse(body)
+            people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-                for username in people
-                    points[username] ?= 0
-                    points[username] += 5
-                    return
-    , 10000)
+            for username in people
+                points[username] ?= 0
+                points[username] += 5
+    ), 10000
