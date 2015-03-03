@@ -130,7 +130,7 @@ module.exports = (robot) ->
             score = ["#{user} has #{attrs.points}" for user, attrs of leaders]
 
             # Slice the top X results from array once sorted.
-            topscore = score.slice(0, pointcount)
+            topscore = score.slice(0, [pointcount])
 
             # Numeric descending sort: points.sort(function(a, b){return b-a});
             # score.sort(a, b) ->
