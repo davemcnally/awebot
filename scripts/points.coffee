@@ -113,14 +113,18 @@ module.exports = (robot) ->
             # call on X amount of them when needed.
 
             leaders =
+                superking119:
+                    points: 8
                 masonest:
                     points: 20
                 knexem:
                     points: 10
-                superking119:
-                    points: 8
 
             score = ["#{user} has #{attrs.points}" for user, attrs of leaders]
+
+            # Numeric descending sort: points.sort(function(a, b){return b-a});
+            score.sort(a, b) ->
+                b - a
 
             msg.send "The top #{pointcount} users with the most points are: #{score}"
             return
