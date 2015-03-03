@@ -108,7 +108,7 @@ module.exports = (robot) ->
     robot.respond /top (\d*)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pointcount = msg.match[1]
-            leaders = pointcount([username + " with " + points[username] + " points."])
+            leaders = (username for username in people when username isnt 'awebot')
 
             msg.send "The top #{pointcount} users with the most points are: #{leaders}"
             return
