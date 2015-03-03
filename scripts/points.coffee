@@ -112,22 +112,22 @@ module.exports = (robot) ->
             # their own array so we can reference them here and then
             # call on X amount of them when needed.
 
-            leaders =
-                superking119:
-                    points: 8
-                masonest:
-                    points: 20
-                knexem:
-                    points: 10
-                harry:
-                    points: 12
-                john:
-                    points: 40
-                peter:
-                    points: 2
+            # leaders =
+            #     superking119:
+            #         points: 8
+            #     masonest:
+            #         points: 20
+            #     knexem:
+            #         points: 10
+            #     harry:
+            #         points: 12
+            #     john:
+            #         points: 40
+            #     peter:
+            #         points: 2
 
             # Create array of users and points
-            score = ["#{user} has #{attrs.points}" for user, attrs of leaders]
+            score = ["#{username} has #{points[username]}" for username in people]
 
             # Slice the top X results from array once sorted.
             # topscore = score.slice(0, 3) would be top 3 for example.
