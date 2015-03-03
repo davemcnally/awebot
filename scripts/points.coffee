@@ -106,21 +106,17 @@ module.exports = (robot) ->
                 points[username] += 5
     ), 60000
 
-    # Get a list of the top X users for point totals.
     robot.respond /top (\d*)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pointcount = msg.match[1]
 
-            # Create array of users and points
+            # Currently only seems to get results from in-chat users at time of command
             score = ["#{username} has #{points[username]}" for username in people]
 
-            # Slice the top X results from array once sorted.
-            # topscore = score.slice(0, 3) would be top 3 for example.
+            # Currently ignores pointcount for slice parameter
+            # and just shows results for all active people at
+            # the time of the command being called.
             topscore = score.slice(0, pointcount)
-
-            # Numeric descending sort: points.sort(function(a, b){return b-a});
-            # score.sort(a, b) ->
-            #   b - a
 
             msg.send "The top #{pointcount} users with the most points are: #{topscore}"
             return
