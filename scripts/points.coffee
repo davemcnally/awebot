@@ -110,5 +110,5 @@ module.exports = (robot) ->
             pointcount = msg.match[1]
             # leaders = pointcount([username + " with " + points[username] + " points."])
 
-            msg.send "The top " + pointcount " users with the most points are: "
+            msg.send "The top #{pointcount} users with the most points are: "
             return
