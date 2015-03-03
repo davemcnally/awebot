@@ -104,11 +104,13 @@ module.exports = (robot) ->
     ), 60000
 
     # Get a list of the top X users for point totals.
-    # Work in progress. Winging it.
     robot.respond /top (\d*)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pointcount = msg.match[1]
-            leaders = (username for username in people when username isnt 'awebot')
 
-            msg.send "The top #{pointcount} users with the most points are: #{leaders}"
+            # Users above in our increment section should be placed into
+            # their own array so we can reference them here and then
+            # call on X amount of them when needed.
+
+            msg.send "The top #{pointcount} users with the most points are: "
             return
