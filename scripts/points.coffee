@@ -102,3 +102,13 @@ module.exports = (robot) ->
                 points[username] ?= 0
                 points[username] += 5
     ), 60000
+
+    # Get a list of the top X users for point totals.
+    # Work in progress. Winging it.
+    robot.respond /^top (\d*)$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            pointcount = msg.match[1]
+            leaders = pointcount([username + " with " + points[username] + " points."])
+
+            msg.send "The top " + pointcount " users with the most points are: " + leaders
+            return
