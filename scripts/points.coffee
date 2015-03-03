@@ -120,7 +120,7 @@ module.exports = (robot) ->
                 superking119:
                     points: 8
 
-            score = "#{user} has #{attrs.points}" for user, attrs of leaders
+            score = ["#{user} has #{attrs.points}" for user, attrs of leaders]
 
             msg.send "The top #{pointcount} users with the most points are: #{score}"
             return
