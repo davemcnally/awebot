@@ -119,12 +119,22 @@ module.exports = (robot) ->
                     points: 20
                 knexem:
                     points: 10
+                harry:
+                    points: 12
+                john:
+                    points: 40
+                peter:
+                    points: 2
 
+            # Create array of users and points
             score = ["#{user} has #{attrs.points}" for user, attrs of leaders]
+
+            # Slice the top X results from array once sorted.
+            topscore = score.slice(0, pointcount)
 
             # Numeric descending sort: points.sort(function(a, b){return b-a});
             # score.sort(a, b) ->
             #   b - a
 
-            msg.send "The top #{pointcount} users with the most points are: #{score}"
+            msg.send "The top #{pointcount} users with the most points are: #{topscore}"
             return
