@@ -112,5 +112,15 @@ module.exports = (robot) ->
             # their own array so we can reference them here and then
             # call on X amount of them when needed.
 
-            msg.send "The top #{pointcount} users with the most points are: "
+            leaders =
+                masonest:
+                    points: 20
+                knexem:
+                    points: 10
+                superking119:
+                    points: 8
+
+            score = "#{user} has #{attrs.points}" for user, attrs of leaders
+
+            msg.send "The top #{pointcount} users with the most points are: #{score}"
             return
