@@ -14,6 +14,9 @@
 #   brettlangdon
 
 points = {}
+username = {}
+people = {}
+
 flatten = (array) ->
     Array::concat.apply([], array)
 
@@ -107,24 +110,6 @@ module.exports = (robot) ->
     robot.respond /top (\d*)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pointcount = msg.match[1]
-
-            # Users above in our increment section should be placed into
-            # their own array so we can reference them here and then
-            # call on X amount of them when needed.
-
-            # leaders =
-            #     superking119:
-            #         points: 8
-            #     masonest:
-            #         points: 20
-            #     knexem:
-            #         points: 10
-            #     harry:
-            #         points: 12
-            #     john:
-            #         points: 40
-            #     peter:
-            #         points: 2
 
             # Create array of users and points
             score = ["#{username} has #{points[username]}" for username in people]
