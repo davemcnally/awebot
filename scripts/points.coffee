@@ -122,11 +122,20 @@ module.exports = (robot) ->
     #
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
-    robot.respond /scores$/i, (msg) ->
+    robot.respond /output$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
             # Returns active users only with their points
             # score = ["#{username} has #{points[username]}" for username in people]
 
-            score = ["#{username} has #{points[username]}" for username in people by +1]
-            msg.send "Stored scores: #{score}"
+            # Also only returns active users at the moment
+            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
+
+            output1 = [robot.brain.data.points]
+            output2 = [robot.brain.data.points.usernames]
+            output3 = [robot.brain.data.points.points]
+            output4 = [robot.brain.data.points.usernames.points]
+
+            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
+
+            msg.send "Brain output tests: #{scores}"
