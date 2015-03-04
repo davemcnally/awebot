@@ -124,19 +124,19 @@ module.exports = (robot) ->
 
     robot.respond /output$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            points[username] ?= 0
-
             # Returns active users only with their points
             # score = ["#{username} has #{points[username]}" for username in people]
 
             # Also only returns active users at the moment
             # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
 
-            # output1 = robot.brain.data
-            output2 = robot.brain.data('points')
-            output3 = robot.brain.data('points.username')
-            output4 = robot.brain.data('data.points.username')
+            output1 = robot.brain.get('data')
+            output2 = robot.brain.get('points')
+            output3 = robot.brain.get('points.username')
+            output4 = robot.brain.get('data.points.username')
 
-            outputs = ["Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
+            points[username] ?= 0
+
+            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
 
             msg.send "Brain output tests: #{outputs}"
