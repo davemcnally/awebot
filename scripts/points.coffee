@@ -124,9 +124,6 @@ module.exports = (robot) ->
 
     robot.respond /scores$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            robot.brain.get points
-            points[username] ?= 0
 
-            for username in people
-                score = ["#{username} has #{points[username]}"]
+            score = ["#{username} has #{points[username]}" for username in people]
             msg.send "Stored scores: #{score}"
