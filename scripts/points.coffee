@@ -122,7 +122,7 @@ module.exports = (robot) ->
     #
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
-    robot.respond /output$/i, (msg) ->
+    robot.respond /output1$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             # Returns active users only with their points
             # score = ["#{username} has #{points[username]}" for username in people]
@@ -131,12 +131,34 @@ module.exports = (robot) ->
             # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
 
             points[username] ?= 0
-
             output1 = ["#{username} has #{points[username]}" for points in points]
+            outputs1 = ["Output 1: #{output1}"]
+
+            msg.send "Brain output tests: #{outputs1}"
+
+    robot.respond /output2$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+
+            points[username] ?= 0
             output2 = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
+            outputs2 = ["Output 2: #{output2}"]
+
+            msg.send "Brain output tests: #{outputs2}"
+
+    robot.respond /output3$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+
+            points[username] ?= 0
             output3 = ["#{username} has #{points[username]}" for points in robot.brain.data.points.username]
+            outputs3 = ["Output 3: #{output3}"]
+
+            msg.send "Brain output tests: #{outputs3}"
+
+    robot.respond /output4$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+
+            points[username] ?= 0
             output4 = ["#{username} has #{points[username]}" for points in robot.brain.data('points')]
+            outputs4 = ["Output 4: #{output4}"]
 
-            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
-
-            msg.send "Brain output tests: #{outputs}"
+            msg.send "Brain output tests: #{outputs4}"
