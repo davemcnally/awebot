@@ -111,8 +111,8 @@ module.exports = (robot) ->
             pointcount = msg.match[1]
 
             # Currently only seems to get results from in-chat users at time of command
-            savednames = robot.brain.get "people.username"
-            savedpoints = robot.brain.get "people.username.points"
+            savednames = [robot.brain.get "people.username"]
+            savedpoints = [robot.brain.get "people.username.points"]
 
             score = ["#{savednames} has #{savedpoints[savednames]}"]
 
