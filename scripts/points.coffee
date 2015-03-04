@@ -116,7 +116,9 @@ module.exports = (robot) ->
             # Currently ignores pointcount for slice parameter
             # and just shows results for all active people at
             # the time of the command being called.
-            topscore = score.slice(0, pointcount)
+            topscore = score.sort((a, b) ->
+                b.points - a.points
+            ).slice(0, pointcount)
 
             msg.send "The top #{pointcount} users with the most points are: #{topscore}"
             return
