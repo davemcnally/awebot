@@ -125,5 +125,8 @@ module.exports = (robot) ->
     robot.respond /scores$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            score = ["#{username} has #{points[username]}" for username in people]
+            # Returns active users only with their points
+            # score = ["#{username} has #{points[username]}" for username in people]
+
+            score = ["#{username} has #{points[username]}" for username in people by +1]
             msg.send "Stored scores: #{score}"
