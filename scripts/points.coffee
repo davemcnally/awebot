@@ -126,5 +126,5 @@ module.exports = (robot) ->
     robot.respond /allpoints$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            allnames = [robot.brain.get "points"]
-            msg.send "Stored users: #{allpoints}"
+            allpoints = [robot.brain.get "points"]
+            msg.send "Stored points: #{allpoints}"
