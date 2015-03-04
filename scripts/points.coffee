@@ -111,14 +111,18 @@ module.exports = (robot) ->
             pointcount = msg.match[1]
 
             # Currently only seems to get results from in-chat users at time of command
-            score = ["#{username} has #{points[username]}" for username in people]
+            score = ["#{username} has #{points[username]}" if username.points]
 
-            # Currently ignores pointcount for slice parameter
-            # and just shows results for all active people at
-            # the time of the command being called.
-            topscore = score.sort((a, b) ->
-                b.points[username] - a.points[username]
-            ).slice(0, pointcount)
+            if username.points
+                score = ["#{username} has #{points[username]}"]
 
-            msg.send "The top #{pointcount} users with the most points are: #{topscore}"
+                topscore = score.sort((a, b) ->
+                    b.points[username] - a.points[username]
+                ).slice(0, pointcount)
+
+                msg.send "The top #{pointcount} users with the most points are: #{topscore}"
+
+            else
+                msg.send "There are no users with points."
+
             return
