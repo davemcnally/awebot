@@ -106,18 +106,24 @@ module.exports = (robot) ->
                 points[username] += 5
     ), 60000
 
-    robot.respond /top (\d*)$/i, (msg) ->
+    # robot.respond /top (\d*)$/i, (msg) ->
+    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+    #         pointcount = msg.match[1]
+    #
+    #         savednames = [robot.brain.get "people.username"]
+    #         savedpoints = [robot.brain.get "people.username.points"]
+    #
+    #         score = ["#{savednames} has #{savedpoints[savednames]}"]
+    #
+    #         topscore = score.sort((a, b) ->
+    #             b.savedpoints[savednames] - a.savedpoints[savednames]
+    #         ).slice(0, pointcount)
+    #
+    #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
+
+    # Testing brain.get functionality
+    robot.respond /allnames$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            pointcount = msg.match[1]
 
-            # Currently only seems to get results from in-chat users at time of command
-            savednames = [robot.brain.get "people.username"]
-            savedpoints = [robot.brain.get "people.username.points"]
-
-            score = ["#{savednames} has #{savedpoints[savednames]}"]
-
-            topscore = score.sort((a, b) ->
-                b.savedpoints[savednames] - a.savedpoints[savednames]
-            ).slice(0, pointcount)
-
-            msg.send "The top #{pointcount} users with the most points are: #{topscore}"
+            allnames = [robot.brain.get "people.username"]
+            msg.send "Stored users: #{allnames}"
