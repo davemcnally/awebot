@@ -11,7 +11,7 @@ module.exports = (robot) ->
             msg.send "Watch it, #{msg.envelope.user.name}! You need permission to post links."
             return
 
-    robot.hear /(nigger*\w*|nigga*\w*|cunt*\w*|fag*\w*|queer*\w*|twat*\w*)/i, (msg) ->
+    robot.hear /(nigger\w*|nigga\w*|cunt\w*|fag\w*|queer\w*|twat\w*)/i, (msg) ->
         unless robot.auth.hasRole(msg.envelope.user, ['admin'])
             msg.send "/timeout #{msg.envelope.user.name} 1"
             msg.send "#{msg.envelope.user.name}! That kind of language is not acceptable."
