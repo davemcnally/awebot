@@ -137,6 +137,6 @@ module.exports = (robot) ->
             output3 = robot.brain.data('points.username')
             output4 = robot.brain.data('data.points.username')
 
-            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}, Output 5: #{points[username]}"]
+            outputs = ["Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}, Output 5: #{points[username]}"]
 
             msg.send "Brain output tests: #{outputs}"
