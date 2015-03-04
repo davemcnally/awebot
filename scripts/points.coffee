@@ -111,7 +111,7 @@ module.exports = (robot) ->
             pointcount = msg.match[1]
 
             # Currently only seems to get results from in-chat users at time of command
-            score = ["#{username} has #{points[username]}" if username.points]
+            # score = ["#{username} has #{points[username]}" if username.points]
 
             if username.points
                 score = ["#{username} has #{points[username]}"]
