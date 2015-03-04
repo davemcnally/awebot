@@ -103,8 +103,7 @@ module.exports = (robot) ->
 
             for username in people
                 points[username] ?= 0
-                robot.brain.set points[username] += 5
-                save(robot)
+                points[username] += 5
     ), 60000
 
     # robot.respond /top (\d*)$/i, (msg) ->
