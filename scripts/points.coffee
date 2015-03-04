@@ -104,6 +104,7 @@ module.exports = (robot) ->
             for username in people
                 points[username] ?= 0
                 points[username] += 5
+                save(robot)
     ), 60000
 
     # robot.respond /top (\d*)$/i, (msg) ->
