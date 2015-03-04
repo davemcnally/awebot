@@ -132,11 +132,11 @@ module.exports = (robot) ->
             # Also only returns active users at the moment
             # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
 
-            output1 = points[username]
+            output1 = robot.brain.data
             output2 = robot.brain.data('points')
             output3 = robot.brain.data('points.username')
             output4 = robot.brain.data('data.points.username')
 
-            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
+            outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}, Output 5: #{points[username]}"]
 
             msg.send "Brain output tests: #{outputs}"
