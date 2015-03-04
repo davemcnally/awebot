@@ -138,4 +138,4 @@ module.exports = (robot) ->
 
             outputs = ["Output 1: #{output1}, Output 2: #{output2}, Output 3: #{output3}, Output 4: #{output4}"]
 
-            msg.send "Brain output tests: #{scores}"
+            msg.send "Brain output tests: #{outputs}"
