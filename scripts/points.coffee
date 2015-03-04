@@ -124,6 +124,7 @@ module.exports = (robot) ->
 
     robot.respond /output$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            points[username] ?= 0
 
             # Returns active users only with their points
             # score = ["#{username} has #{points[username]}" for username in people]
