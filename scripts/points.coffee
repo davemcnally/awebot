@@ -103,7 +103,7 @@ module.exports = (robot) ->
 
             for username in people
                 points[username] ?= 0
-                points[username] += 5
+                robot.brain.set points[username] += 5
                 save(robot)
     ), 60000
 
@@ -126,5 +126,5 @@ module.exports = (robot) ->
     robot.respond /allpoints$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            allpoints = [robot.brain.get('points')]
+            allpoints = [robot.brain.get(points)]
             msg.send "Stored points: #{allpoints}"
