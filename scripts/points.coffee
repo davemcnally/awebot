@@ -117,7 +117,7 @@ module.exports = (robot) ->
             # and just shows results for all active people at
             # the time of the command being called.
             topscore = score.sort((a, b) ->
-                b.points - a.points
+                b.points[username] - a.points[username]
             ).slice(0, pointcount)
 
             msg.send "The top #{pointcount} users with the most points are: #{topscore}"
