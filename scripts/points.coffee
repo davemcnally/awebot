@@ -104,6 +104,7 @@ module.exports = (robot) ->
             for username in people
                 points[username] ?= 0
                 points[username] += 5
+                save(robot)
     ), 60000
 
     # robot.respond /top (\d*)$/i, (msg) ->
@@ -122,8 +123,8 @@ module.exports = (robot) ->
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
     # Testing brain.get functionality
-    robot.respond /allnames$/i, (msg) ->
+    robot.respond /allpoints$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            allnames = [robot.brain.get "people.username"]
-            msg.send "Stored users: #{allnames}"
+            allnames = [robot.brain.get "points"]
+            msg.send "Stored users: #{allpoints}"
