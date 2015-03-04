@@ -122,9 +122,9 @@ module.exports = (robot) ->
     #
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
-    # Testing brain.get functionality
-    robot.respond /allpoints$/i, (msg) ->
+    robot.respond /scores$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            points[username] ?= 0
 
-            allpoints = [robot.brain.get(points)]
-            msg.send "Stored points: #{allpoints}"
+            score = ["#{username} has #{points[username]}"]
+            msg.send "Stored scores: #{score}"
