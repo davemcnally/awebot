@@ -111,18 +111,10 @@ module.exports = (robot) ->
             pointcount = msg.match[1]
 
             # Currently only seems to get results from in-chat users at time of command
-            # score = ["#{username} has #{points[username]}" if username.points]
+            score = ["#{robot.brain.username} has #{robot.brain.points[username]}"]
 
-            if username.points
-                score = ["#{username} has #{points[username]}"]
+            topscore = score.sort((a, b) ->
+                b.robot.brain.points[username] - a.robot.brain.points[username]
+            ).slice(0, pointcount)
 
-                topscore = score.sort((a, b) ->
-                    b.points[username] - a.points[username]
-                ).slice(0, pointcount)
-
-                msg.send "The top #{pointcount} users with the most points are: #{topscore}"
-
-            else
-                msg.send "There are no users with points."
-
-            return
+            msg.send "The top #{pointcount} users with the most points are: #{topscore}"
