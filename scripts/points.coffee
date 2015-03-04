@@ -127,5 +127,5 @@ module.exports = (robot) ->
             robot.brain.get points
             points[username] ?= 0
 
-            score = ["#{username} has #{points[username]}" for username in points]
+            score = ["#{username} has #{points[username]}" .forEach username]
             msg.send "Stored scores: #{score}"
