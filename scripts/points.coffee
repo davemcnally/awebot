@@ -101,13 +101,21 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            robot.brain.set 'people', people
+            robot.brain.set 'winners', people
 
             for username in people
                 points[username] ?= 0
                 points[username] += 5
                 save(robot)
     ), 60000
+
+    # Get a list of stored people and points
+    robot.respond /getset$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+
+            pointcount = robot.brain.get 'winners'
+            savescore = ["#{username} has #{attrs.points}" for username, attrs of pointcount]
+            msg.send "Top points: #{savescore}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
     #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
@@ -124,56 +132,21 @@ module.exports = (robot) ->
     #
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
-    robot.respond /output$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            points[username] ?= 0
-            peoplelist = robot.brain.get 'people'
-
-            # Returns active users only with their points
-            # Getting list from 'people' works but not robot.brain.data
-            score = ["#{username} has #{points[username]}" for username in peoplelist]
-
-            msg.send "Scores: #{score}"
-
-    # robot.respond /getset$/i, (msg) ->
+    # Manual data retrieval from object values
+    # robot.respond /getset1$/i, (msg) ->
     #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
     #
-    #         robot.brain.set 'coins', 10
-    #         coincount = robot.brain.get 'coins'
-    #         msg.send "Coints: #{coincount}"
-
-    robot.respond /getset1$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-
-            saved =
-                masonest:
-                    coins: 20
-                knexem:
-                    coins: 12
-                phillyf:
-                    coins: 1
-                superking:
-                    coins: 30
-
-            robot.brain.set 'winners', saved
-            coincount = robot.brain.get 'winners'
-            savescore = ["#{user} has #{attrs.coins}" for user, attrs of coincount]
-            msg.send "Coins: #{savescore}"
-
-    robot.respond /getset2$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-
-            saved2 =
-                masonest:
-                    coins: 20
-                knexem:
-                    coins: 12
-                phillyf:
-                    coins: 1
-                superking:
-                    coins: 30
-
-            robot.brain.set 'winners2', saved
-            coincount2 = robot.brain.get 'winners2'
-            savescore2 = ["#{user} has #{attrs.coins}" for user, attrs of saved2]
-            msg.send "Coins: #{savescore2}"
+    #         saved =
+    #             masonest:
+    #                 coins: 20
+    #             knexem:
+    #                 coins: 12
+    #             phillyf:
+    #                 coins: 1
+    #             superking:
+    #                 coins: 30
+    #
+    #         robot.brain.set 'winners', saved
+    #         coincount = robot.brain.get 'winners'
+    #         savescore = ["#{user} has #{attrs.coins}" for user, attrs of coincount]
+    #         msg.send "Coins: #{savescore}"
