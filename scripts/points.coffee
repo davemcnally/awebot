@@ -142,9 +142,38 @@ module.exports = (robot) ->
     #         coincount = robot.brain.get 'coins'
     #         msg.send "Coints: #{coincount}"
 
-    robot.respond /getset$/i, (msg) ->
+    robot.respond /getset1$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            robot.brain.set 'coins', 10
-            coincount = robot.brain.get 'coins'
-            msg.send "Coints: #{coincount}"
+            saved =
+                masonest:
+                    coins: 20
+                knexem:
+                    coins: 12
+                phillyf:
+                    coins: 1
+                superking:
+                    coins: 30
+
+            robot.brain.set 'winners', saved
+            coincount = robot.brain.get 'winners'
+            savescore = ["#{user} has #{attrs.coins}" for user, attrs of coincount]
+            msg.send "Coins: #{savescore}"
+
+    robot.respond /getset2$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+
+            saved2 =
+                masonest:
+                    coins: 20
+                knexem:
+                    coins: 12
+                phillyf:
+                    coins: 1
+                superking:
+                    coins: 30
+
+            robot.brain.set 'winners2', saved
+            coincount2 = robot.brain.get 'winners2'
+            savescore2 = ["#{user} has #{attrs.coins}" for user, attrs of saved2]
+            msg.send "Coins: #{savescore2}"
