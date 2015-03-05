@@ -108,12 +108,6 @@ module.exports = (robot) ->
                 points[username] += 5
                 save(robot)
 
-                # Winners is equal to names only, no points
-                # robot.brain.set 'winners', people
-
-                # Winners is equal to one single string of points only
-                # robot.brain.set 'winners', points[username]
-
                 # Winners (and then recall) is equal to all users
                 # with points, and their points respectively.
                 robot.brain.set 'winners', points
@@ -124,42 +118,9 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             recall = robot.brain.get 'winners'
 
-            # savescore = ["#{username} has #{points[username]}" for username in recall]
-            msg.send "#{recall}"
+            # Outputs [object Object]
+            # msg.send "#{recall}"
 
-            # Outputs an inspection of recall
-            msg.send "#{Util.inspect(recall)}"
-
-    # robot.respond /top (\d*)$/i, (msg) ->
-    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-    #         pointcount = msg.match[1]
-    #
-    #         savednames = [robot.brain.get "people.username"]
-    #         savedpoints = [robot.brain.get "people.username.points"]
-    #
-    #         score = ["#{savednames} has #{savedpoints[savednames]}"]
-    #
-    #         topscore = score.sort((a, b) ->
-    #             b.savedpoints[savednames] - a.savedpoints[savednames]
-    #         ).slice(0, pointcount)
-    #
-    #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
-
-    # Manual data retrieval from object values
-    # robot.respond /getset1$/i, (msg) ->
-    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-    #
-    #         saved =
-    #             masonest:
-    #                 coins: 20
-    #             knexem:
-    #                 coins: 12
-    #             phillyf:
-    #                 coins: 1
-    #             superking:
-    #                 coins: 30
-    #
-    #         robot.brain.set 'winners', saved
-    #         coincount = robot.brain.get 'winners'
-    #         savescore = ["#{user} has #{attrs.coins}" for user, attrs of coincount]
-    #         msg.send "Coins: #{savescore}"
+            # Outputs an inspection of recall which comes out as:
+            # { masonest: 3670, awebot: 3860, knexem: 3455 }
+            # msg.send "#{Util.inspect(recall)}"
