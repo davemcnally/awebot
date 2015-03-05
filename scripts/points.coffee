@@ -104,7 +104,9 @@ module.exports = (robot) ->
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
             for username in people
-                unless points[username] == "awebot"
+                if points[username] == "awebot"
+                    # No points for awebot
+                else
                     points[username] ?= 0
                     points[username] += 5
                 save(robot)
