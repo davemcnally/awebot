@@ -144,7 +144,7 @@ module.exports = (robot) ->
             # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
 
             points[username] ?= 0
-            scoretwo = ["#{username} has #{points[username]}" for points in points]
+            scoretwo = ["#{username} has #{points[username]}" for username in points]
 
             msg.send "Brain output tests: #{scoretwo}"
 
@@ -157,6 +157,19 @@ module.exports = (robot) ->
             # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
 
             points[username] ?= 0
-            scorethree = ["#{username} has #{points[username]}" for points in robot.brain.data]
+            scorethree = ["#{username} has #{points[username]}" for username in robot.brain.data]
 
             msg.send "Brain output tests: #{scorethree}"
+
+    robot.respond /output4$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            # Returns active users only with their points
+            # score = ["#{username} has #{points[username]}" for username in people]
+
+            # Also only returns active users at the moment
+            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
+
+            points[username] ?= 0
+            scorefour = ["#{username} has #{points[username]}" for username in people]
+
+            msg.send "Brain output tests: #{scorefour}"
