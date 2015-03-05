@@ -92,11 +92,11 @@ module.exports = (robot) ->
 
         msg.send "Only mods can check the points of others!"
 
-    robot.respond /points$/i, (msg) ->
-        username = "#{msg.envelope.user.name}"
-        points[username] ?= 0
-
-        msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
+    # robot.respond /points$/i, (msg) ->
+    #     username = "#{msg.envelope.user.name}"
+    #     points[username] ?= 0
+    #
+    #     msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
     setInterval (->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
