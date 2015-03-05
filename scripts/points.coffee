@@ -112,7 +112,7 @@ module.exports = (robot) ->
     robot.respond /getset$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
-            savescore = ["#{username} has #{points[username]}" for username of people]
+            savescore = ["#{username} has #{points[username]}" for username in people]
             msg.send "Top points: #{savescore}"
             msg.send "#{Util.inspect(savescore)}"
 
