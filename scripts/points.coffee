@@ -131,9 +131,16 @@ module.exports = (robot) ->
 
             # Returns active users only with their points
             # Getting list from 'people' works but not robot.brain.data
-            score = ["#{username} has #{points[username]}" for people in peoplelist]
+            score = ["#{username} has #{points[username]}" for username in peoplelist]
 
             msg.send "Scores: #{score}"
+
+    # robot.respond /getset$/i, (msg) ->
+    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+    #
+    #         robot.brain.set 'coins', 10
+    #         coincount = robot.brain.get 'coins'
+    #         msg.send "Coints: #{coincount}"
 
     robot.respond /getset$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
