@@ -17,6 +17,8 @@ points = {}
 username = {}
 people = {}
 
+Util = require "util"
+
 flatten = (array) ->
     Array::concat.apply([], array)
 
@@ -115,8 +117,7 @@ module.exports = (robot) ->
 
             pointcount = robot.brain.get 'winners'
             savescore = ["#{username} has #{attrs.points}" for username, attrs of pointcount]
-            console.log winners
-            msg.send "Top points: #{savescore}"
+            msg.send "#{Util.inspect(pointcount)}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
     #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
