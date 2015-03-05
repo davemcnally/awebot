@@ -115,8 +115,9 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
 
             pointcount = robot.brain.get 'winners'
-            savescore = ["#{username} has #{attrs.points}" for username, attrs of pointcount]
+            savescore = ["#{username} has #{points[username]}" for username of pointcount]
             msg.send "Top points: #{savescore}"
+            # msg.send "#{Util.inspect(points)}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
     #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
