@@ -101,6 +101,8 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
+            robot.brain.set 'people', people
+
             for username in people
                 points[username] ?= 0
                 points[username] += 5
@@ -122,54 +124,13 @@ module.exports = (robot) ->
     #
     #         msg.send "The top #{pointcount} users with the most points are: #{topscore}"
 
-    robot.respond /output1$/i, (msg) ->
+    robot.respond /output$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            # Returns active users only with their points
-            # score = ["#{username} has #{points[username]}" for username in people]
-
-            # Also only returns active users at the moment
-            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
-
             points[username] ?= 0
-            scoreone = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
+            peoplelist = robot.brain.get 'people'
 
-            msg.send "Brain output tests: #{scoreone}"
-
-    robot.respond /output2$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             # Returns active users only with their points
-            # score = ["#{username} has #{points[username]}" for username in people]
+            # Getting list from 'people' works but not robot.brain.data
+            score = ["#{username} has #{points[username]}" for points in peoplelist]
 
-            # Also only returns active users at the moment
-            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
-
-            points[username] ?= 0
-            scoretwo = ["#{username} has #{points[username]}" for username in points]
-
-            msg.send "Brain output tests: #{scoretwo}"
-
-    robot.respond /output3$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            # Returns active users only with their points
-            # score = ["#{username} has #{points[username]}" for username in people]
-
-            # Also only returns active users at the moment
-            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
-
-            points[username] ?= 0
-            scorethree = ["#{username} has #{points[username]}" for username in robot.brain.data]
-
-            msg.send "Brain output tests: #{scorethree}"
-
-    robot.respond /output4$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            # Returns active users only with their points
-            # score = ["#{username} has #{points[username]}" for username in people]
-
-            # Also only returns active users at the moment
-            # score = ["#{username} has #{points[username]}" for points in robot.brain.data.points]
-
-            points[username] ?= 0
-            scorefour = ["#{username} has #{points[username]}" for username in people]
-
-            msg.send "Brain output tests: #{scorefour}"
+            msg.send "Scores: #{score}"
