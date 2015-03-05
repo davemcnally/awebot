@@ -114,6 +114,8 @@ module.exports = (robot) ->
                 # Winners is equal to one single string of points only
                 # robot.brain.set 'winners', points[username]
 
+                # Winners (and then recall) is equal to all users
+                # with points, and their points respectively.
                 robot.brain.set 'winners', points
     ), 60000
 
@@ -122,8 +124,10 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             recall = robot.brain.get 'winners'
 
-            # savescore = ["#{username} has #{points[username]}" for username in recall]
-            # msg.send "Top points: #{savescore}"
+            savescore = ["#{username} has #{points[username]}" for username in recall]
+            msg.send "Top points: #{savescore}"
+
+            # Outputs an inspection of recall
             msg.send "#{Util.inspect(recall)}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
