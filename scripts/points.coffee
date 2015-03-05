@@ -107,7 +107,7 @@ module.exports = (robot) ->
                 points[username] ?= 0
                 points[username] += 5
                 save(robot)
-                robot.brain.set 'winners' people
+                robot.brain.set 'winners', people
     ), 60000
 
     # Get a list of stored people and points
