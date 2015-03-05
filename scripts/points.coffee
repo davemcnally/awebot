@@ -101,7 +101,7 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            robot.brain.set 'people', people
+            robot.brain.set 'people', username
 
             for username in people
                 points[username] ?= 0
@@ -131,6 +131,7 @@ module.exports = (robot) ->
 
             # Returns active users only with their points
             # Getting list from 'people' works but not robot.brain.data
-            score = ["#{username} has #{points[username]}" for people in peoplelist]
+            for people in peoplelist
+             score = ["#{username} has #{points[username]}" for username in peoplelist]
 
             msg.send "Scores: #{score}"
