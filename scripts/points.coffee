@@ -111,7 +111,10 @@ module.exports = (robot) ->
                 # Winners is equal to names only, no points
                 # robot.brain.set 'winners', people
 
-                robot.brain.set 'winners', points[username]
+                # Winners is equal to one single string of points only
+                # robot.brain.set 'winners', points[username]
+
+                robot.brain.set 'winners', points
     ), 60000
 
     # Get a list of stored people and points
