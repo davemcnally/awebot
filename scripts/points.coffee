@@ -108,7 +108,6 @@ module.exports = (robot) ->
             for username in people
                 points[username] ?= 0
                 points[username] += 5
-                save(robot)
     ), 60000
 
     # Get a list of stored people and points
@@ -117,7 +116,7 @@ module.exports = (robot) ->
 
             pointcount = robot.brain.get 'winners'
             savescore = ["#{username} has #{attrs.points}" for username, attrs of pointcount]
-            msg.send "#{Util.inspect(points)}"
+            msg.send "#{Util.inspect(points[username])}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
     #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
