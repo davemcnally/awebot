@@ -125,4 +125,4 @@ module.exports = (robot) ->
             # { masonest: 3670, awebot: 3860, knexem: 3455 }
             # msg.send "#{Util.inspect(recall)}"
 
-            msg.send "#{username}" for username in recall"
+            msg.send "#{username}" for username in recall
