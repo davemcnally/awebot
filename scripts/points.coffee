@@ -115,6 +115,7 @@ module.exports = (robot) ->
 
             pointcount = robot.brain.get 'winners'
             savescore = ["#{username} has #{attrs.points}" for username, attrs of pointcount]
+            console.log winners
             msg.send "Top points: #{savescore}"
 
     # robot.respond /top (\d*)$/i, (msg) ->
