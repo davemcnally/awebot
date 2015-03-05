@@ -113,7 +113,7 @@ module.exports = (robot) ->
     # Get a list of stored people and points
     robot.respond /getset$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            robot.brain.get 'winners'
+            recall = robot.brain.get 'winners'
 
             savescore = ["#{username} has #{points[username]}" for username in winners]
             msg.send "Top points: #{savescore}"
