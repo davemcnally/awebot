@@ -131,6 +131,6 @@ module.exports = (robot) ->
 
             # Returns active users only with their points
             # Getting list from 'people' works but not robot.brain.data
-            score = ["#{username} has #{points[username]}" for points in peoplelist]
+            score = ["#{username} has #{points[username]}" for people in peoplelist]
 
             msg.send "Scores: #{score}"
