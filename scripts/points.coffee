@@ -105,7 +105,7 @@ module.exports = (robot) ->
 
             for username in people
                 points[username] ?= 0
-                points[username] += 5 unless username = 'awebot'
+                points[username not 'awebot'] += 5
                 save(robot)
 
             # Winners (and then recall) is equal to all users
