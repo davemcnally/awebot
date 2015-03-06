@@ -103,9 +103,9 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            for username in people not 'awebot'
+            for username in people
                 points[username] ?= 0
-                points[username] += 5
+                points[username not 'awebot'] += 5
                 save(robot)
 
             # Winners (and then recall) is equal to all users
