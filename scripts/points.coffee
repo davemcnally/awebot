@@ -103,9 +103,7 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            for username in people
-                if username = 'awebot'
-                    continue
+            for username in people not 'awebot'
                 points[username] ?= 0
                 points[username] += 5
                 save(robot)
