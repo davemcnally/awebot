@@ -103,17 +103,14 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            if robot.auth.hasRole('awebot', ['bot'])
-                # No points for awebot
-            else
-                for username in people
-                    points[username] ?= 0
-                    points[username] += 5
-                    save(robot)
+            for username in people isnt 'awebot'
+                points[username] ?= 0
+                points[username] += 5
+                save(robot)
 
-                # Winners (and then recall) is equal to all users
-                # with points, and their points respectively.
-                robot.brain.set 'winners', points
+            # Winners (and then recall) is equal to all users
+            # with points, and their points respectively.
+            robot.brain.set 'winners', points
     ), 60000
 
     # Get a list of stored people and points
