@@ -103,7 +103,7 @@ module.exports = (robot) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers])
 
-            if points[username] == "awebot"
+            if robot.auth.hasRole('awebot', ['bot'])
                 # No points for awebot
             else
                 for username in people
