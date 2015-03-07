@@ -135,7 +135,7 @@ module.exports = (robot) ->
             scores = [username + " has " + points[username]] for username of recall
 
             topscore = scores.sort((a, b) ->
-                b.points[username] - a.points[username]
+                b.points - a.points
             ).slice(0, pointcount)
 
             # msg.send "The top #{pointcount} users with the most points are: #{topscore}"
