@@ -98,22 +98,22 @@ module.exports = (robot) ->
     #
     #     msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
-    setInterval (->
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
-            chat = JSON.parse(body)
-            people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
-                p != 'awebot'
-            )
-
-            for username in people
-                points[username] ?= 0
-                points[username] += 5
-                save(robot)
-
-            # Winners (and then recall) is equal to all users
-            # with points, and their points respectively.
-            robot.brain.set 'winners', points
-    ), 60000
+    # setInterval (->
+    #     robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
+    #         chat = JSON.parse(body)
+    #         people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
+    #             p != 'awebot'
+    #         )
+    #
+    #         for username in people
+    #             points[username] ?= 0
+    #             points[username] += 5
+    #             save(robot)
+    #
+    #         # Winners (and then recall) is equal to all users
+    #         # with points, and their points respectively.
+    #         robot.brain.set 'winners', points
+    # ), 60000
 
     # Get a list of stored people and points
     robot.respond /getset$/i, (msg) ->
