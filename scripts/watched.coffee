@@ -66,7 +66,7 @@ module.exports = (robot) ->
         hours[timename] ?= 0
         hourstotal = hours[timename] / 100
 
-        msg.send "#{msg.envelope.user.name}, you have spent " + hourstotal + " in the channel!"
+        msg.send "#{msg.envelope.user.name}, you have spent " + hourstotal + "hours in the channel!"
 
     #
     # We don’t need the following until it's fully
