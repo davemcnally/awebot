@@ -59,7 +59,7 @@ module.exports = (robot) ->
 
     robot.respond /take all points from (.*?)\s?$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            username = msg.match[1]
+            username = msg.match[1].toLowerCase()
             points[username] = 0
             msg.send username + ' WHAT DID YOU DO?!'
             save(robot)
@@ -69,7 +69,7 @@ module.exports = (robot) ->
     robot.respond /take (\d+) points from (.*?)\s?$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pts = msg.match[1]
-            username = msg.match[2]
+            username = msg.match[2].toLowerCase()
             points[username] ?= 0
 
             if points[username] is 0
@@ -84,7 +84,7 @@ module.exports = (robot) ->
 
     robot.respond /points ([a-zA-Z0-9_]*)/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            username = msg.match[1]
+            username = msg.match[1].toLowerCase()
             points[username] ?= 0
 
             msg.send username + ' has ' + points[username] + ' points!'
