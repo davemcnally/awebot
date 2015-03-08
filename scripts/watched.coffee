@@ -11,6 +11,7 @@
 
 hours = {}
 timename = {}
+tnamelower = {}
 timepeople = {}
 hourstotal = {}
 
@@ -52,10 +53,11 @@ module.exports = (robot) ->
     robot.respond /hours ([a-zA-Z0-9_]*)/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             timename = msg.match[1]
-            hours[timename] ?= 0
-            hourstotal = hours[timename] / 100
+            tnamelower = timename.toLowerCase()
+            hours[tnamelower] ?= 0
+            hourstotal = hours[tnamelower] / 100
 
-            msg.send timename + ' has watched for ' + hourstotal + ' hours!'
+            msg.send tnamelower + ' has spent ' + hourstotal + ' hours in the channel!'
             return
 
         msg.send "Only mods can check the hours of others!"
@@ -63,10 +65,11 @@ module.exports = (robot) ->
     # Allows viewers to check their own hours watched.
     robot.respond /hours$/i, (msg) ->
         timename = "#{msg.envelope.user.name}"
-        hours[timename] ?= 0
-        hourstotal = hours[timename] / 100
+        tnamelower = timename.toLowerCase()
+        hours[tnamelower] ?= 0
+        hourstotal = hours[tnamelower] / 100
 
-        msg.send "#{msg.envelope.user.name}, you have " + hourstotal + " hours watched!"
+        msg.send tnamelower + ", you have spent " + hourstotal + " in the channel!"
 
     #
     # We don’t need the following until it's fully
