@@ -36,6 +36,9 @@ module.exports = (robot) ->
             raffle = on
             save(robot)
             msg.send "A raffle has now started and costs " + cost + " points to enter. If you have enough, use !ticket to enter. You can only enter once per raffle."
+            return
+
+        msg.send "Only Masonest can start raffles!"
 
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
@@ -44,6 +47,9 @@ module.exports = (robot) ->
             entered[username] = false
             save(robot)
             msg.send "The raffle is now closed. A winner will be announced in this message once finished."
+            return
+
+        msg.send "Only Masonest can close a raffle."
 
     # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
