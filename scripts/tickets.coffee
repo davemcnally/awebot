@@ -38,12 +38,14 @@ module.exports = (robot) ->
             cost = msg.match[1]
             raffle is on
             save(robot)
+            msg.send "A raffle has now started and costs " + cost + " points to enter. If you have enough, use !ticket to enter. You can only enter once per raffle."
 
     robot.respond /raffle draw$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             raffle is off
             entered[username] is false
             save(robot)
+            msg.send "The raffle is now closed. A winner will be announced in this message once finished."
 
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
