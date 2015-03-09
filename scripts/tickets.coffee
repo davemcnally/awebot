@@ -15,7 +15,7 @@ tickets = {}
 raffle = {}
 cost = {}
 entered = {}
-entrants = {}
+bought = {}
 
 Util = require "util"
 
@@ -24,7 +24,6 @@ flatten = (array) ->
 
 save = (robot) ->
     robot.brain.data.points = points
-    robot.brain.data.entrants = entrants
 
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
@@ -52,7 +51,7 @@ module.exports = (robot) ->
         if points[username] >= cost and raffle is on and entered[username] is false
             entered[username] = true
             points[username] -= cost
-            entrants.push(entered[username])
+            bought.push(username)
             save(robot)
             msg.send "Test: raffle entered."
         else
@@ -77,7 +76,7 @@ module.exports = (robot) ->
     # Check entrants. Temp command for testing
     robot.respond /entrants$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            tickets = [entered[username] for username in entrants]
+            tickets = [username for username in bought]
             msg.send "Entrants for this raffle: " + tickets
-            msg.send "Inspection: #{Util.inspect(entrants)}"
+            msg.send "Inspection: #{Util.inspect(bought)}"
             return
