@@ -38,6 +38,7 @@ award_points = (msg, username, pts) ->
 
 save = (robot) ->
     robot.brain.data.points = points
+    robot.brain.data.tickets = tickets
 
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
