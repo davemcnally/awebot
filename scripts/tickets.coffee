@@ -58,7 +58,7 @@ module.exports = (robot) ->
         else
             if points[username] <= cost
                 msg.send "Test: Not enough points."
-            if raffle isnt on
+            else if raffle isnt on
                 msg.send "Test: raffle isn't running."
-            if entered[username] is true
+            else if entered[username] is true
                 msg.send "Test: You already entered."
