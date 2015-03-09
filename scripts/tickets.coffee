@@ -1,17 +1,13 @@
-# A basic points system to build
-# points over time. Can also be manually
-# awarded.
+# A basic raffle system using points system.
 #
 # Command(s):
-#   hubot give <number> points to <username>    - Award <number> points to <username>
-#   hubot give <username> <number> points       - Award <number> points to <username>
-#   hubot take <number> points from <username>  - Take away <number> points from <username>
-#   hubot points                                - See how many points you have
-#   hubot points <username>                     - See how many points <username> has
-#   hubot take all points from <username>       - Removes all points from <username>
+#   hubot raffle start <cost> - Start a raffle at <cost> points to enter
+#   hubot raffle draw         - Close raffle, pick winner and reset.
+#   hubot ticket              - Enters raffle and takes <cost> points from entrant.
+
 #
-# Original Author:
-#   brettlangdon
+# Author:
+#   Dave McNally
 
 points = {}
 username = {}
