@@ -44,11 +44,11 @@ module.exports = (robot) ->
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
-        entrants = flatten([entered[username]])
 
         if points[username] >= cost and raffle is on and entered[username] is false
             entered[username] = true
             points[username] -= cost
+            entrants.push(entered[username])
             save(robot)
             msg.send "Test: raffle entered."
         else
