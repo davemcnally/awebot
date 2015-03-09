@@ -17,6 +17,8 @@ cost = {}
 entered = {}
 entrants = {}
 
+Util = require "util"
+
 flatten = (array) ->
     Array::concat.apply([], array)
 
@@ -76,5 +78,6 @@ module.exports = (robot) ->
     robot.respond /entrants$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             tickets = [entered[username] for username in entrants]
-            msg.send "Entrants for this raffle: " + entrants
+            msg.send "Entrants for this raffle: " + tickets
+            msg.send "Inspection: #{Util.inspect(entrants)}"
             return
