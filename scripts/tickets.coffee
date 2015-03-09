@@ -29,6 +29,7 @@ module.exports = (robot) ->
         points = robot.brain.data.points or {}
         tickets = robot.brain.data.tickets or {}
 
+    # Start raffle with chosen cost.
     robot.respond /raffle start (\d+)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             cost = msg.match[1]
@@ -36,6 +37,7 @@ module.exports = (robot) ->
             save(robot)
             msg.send "A raffle has now started and costs " + cost + " points to enter. If you have enough, use !ticket to enter. You can only enter once per raffle."
 
+    # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             raffle is off
@@ -43,6 +45,7 @@ module.exports = (robot) ->
             save(robot)
             msg.send "The raffle is now closed. A winner will be announced in this message once finished."
 
+    # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
