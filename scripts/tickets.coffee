@@ -28,6 +28,8 @@ module.exports = (robot) ->
     robot.brain.on 'loaded', ->
         points = robot.brain.data.points or {}
         tickets = robot.brain.data.tickets or {}
+        raffle = off
+        entered[username] = false
 
     # Start raffle with chosen cost.
     robot.respond /raffle start (\d+)$/i, (msg) ->
@@ -74,5 +76,5 @@ module.exports = (robot) ->
     robot.respond /entrants$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             tickets = [entered[username] for username in entrants]
-            msg.send "Entrants for this raffle: " + tickets
+            msg.send "Entrants for this raffle: " + entrants
             return
