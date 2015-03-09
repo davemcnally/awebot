@@ -11,18 +11,18 @@
 
 points = {}
 username = {}
-people = {}
 tickets = {}
 raffle = {}
 cost = {}
 entered = {}
+entrants = {}
 
 flatten = (array) ->
     Array::concat.apply([], array)
 
 save = (robot) ->
     robot.brain.data.points = points
-    robot.brain.data.tickets = tickets
+    robot.brain.data.entrants = entrants
 
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
@@ -40,21 +40,11 @@ module.exports = (robot) ->
 
         msg.send "Only Masonest can start raffles!"
 
-    # Close raffle, drawn winner and reset.
-    robot.respond /raffle draw$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            raffle = off
-            entered[username] = false
-            save(robot)
-            msg.send "The raffle is now closed. A winner will be announced in this message once finished."
-            return
-
-        msg.send "Only Masonest can close a raffle."
-
     # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
+        entrants = flatten([entered[username]])
 
         if points[username] >= cost and raffle is on and entered[username] is false
             entered[username] = true
@@ -68,3 +58,21 @@ module.exports = (robot) ->
                 msg.send "Test: raffle isn't running."
             if entered[username] is true
                 msg.send "Test: You already entered."
+
+    # Close raffle, drawn winner and reset.
+    robot.respond /raffle draw$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            raffle = off
+            entered[username] = false
+            save(robot)
+            msg.send "The raffle is now closed. A winner will be announced in this message once finished."
+            return
+
+        msg.send "Only Masonest can close a raffle."
+
+    # Check entrants. Temp command for testing
+    robot.respond /entrants$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            tickets = [entered[username] for username in entrants]
+            msg.send "Entrants for this raffle: " + tickets
+            return
