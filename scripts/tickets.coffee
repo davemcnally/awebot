@@ -17,8 +17,6 @@ cost = {}
 entered = {}
 bought = []
 
-Util = require "util"
-
 flatten = (array) ->
     Array::concat.apply([], array)
 
@@ -28,22 +26,26 @@ save = (robot) ->
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
         points = robot.brain.data.points or {}
-        tickets = robot.brain.data.tickets or {}
-        raffle = off
-        entered[username] = false
+
+    # Temp cycle of process to ready raffles.
+    robot.respond /raffle reset$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            cost ?= 0
+            raffle = on
+            raffle = off
+            entered[username] = false
+            bought.length = 0
+            save(robot)
+            return
 
     # Start raffle with chosen cost.
     robot.respond /raffle start (\d+)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             cost = msg.match[1]
             raffle = on
-            entered[username] = false
-            bought.length = 0
             save(robot)
             msg.send "A raffle has now started and costs " + cost + " points to enter. If you have enough, use !ticket to enter. You can only enter once per raffle."
             return
-
-        msg.send "Only Masonest can start raffles!"
 
     # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
@@ -73,8 +75,6 @@ module.exports = (robot) ->
             save(robot)
             msg.send "The raffle is now closed. A winner will be announced in this message once finished."
             return
-
-        msg.send "Only Masonest can close a raffle."
 
     # Check entrants. Temp command for testing
     robot.respond /entrants$/i, (msg) ->
