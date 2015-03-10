@@ -67,6 +67,7 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             raffle = off
             entered[username] = false
+            bought.length = 0
             save(robot)
             msg.send "The raffle is now closed. A winner will be announced in this message once finished."
             return
