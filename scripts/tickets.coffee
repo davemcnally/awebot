@@ -4,6 +4,7 @@
 #   hubot raffle start <cost> - Start a raffle at <cost> points to enter
 #   hubot raffle draw         - Close raffle, pick winner and reset.
 #   hubot ticket              - Enters raffle and takes <cost> points from entrant.
+#   hubot entrants            - A temp command for checking entrants in raffle.
 
 #
 # Author:
