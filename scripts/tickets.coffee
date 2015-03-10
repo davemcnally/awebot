@@ -37,6 +37,8 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             cost = msg.match[1]
             raffle = on
+            entered[username] = false
+            bought.length = 0
             save(robot)
             msg.send "A raffle has now started and costs " + cost + " points to enter. If you have enough, use !ticket to enter. You can only enter once per raffle."
             return
@@ -79,5 +81,4 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             tickets = [username for username in bought]
             msg.send "Entrants for this raffle: " + tickets
-            msg.send "Inspection: #{Util.inspect(bought)}"
             return
