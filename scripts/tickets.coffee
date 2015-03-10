@@ -17,26 +17,12 @@ cost = {}
 entered = {}
 bought = []
 
-flatten = (array) ->
-    Array::concat.apply([], array)
-
 save = (robot) ->
     robot.brain.data.points = points
 
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
         points = robot.brain.data.points or {}
-
-    # Temp cycle of process to ready raffles.
-    robot.respond /raffle reset$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            cost ?= 0
-            raffle = on
-            raffle = off
-            entered[username] = false
-            bought.length = 0
-            save(robot)
-            return
 
     # Start raffle with chosen cost.
     robot.respond /raffle start (\d+)$/i, (msg) ->
@@ -58,13 +44,7 @@ module.exports = (robot) ->
             bought.push(username)
             save(robot)
             msg.send "Test: raffle entered."
-        else
-            if points[username] <= cost
-                msg.send "Test: Not enough points."
-            if raffle isnt on
-                msg.send "Test: raffle isn't running."
-            if entered[username] is true
-                msg.send "Test: You already entered."
+            return
 
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
