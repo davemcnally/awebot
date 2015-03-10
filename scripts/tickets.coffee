@@ -15,7 +15,7 @@ tickets = {}
 raffle = {}
 cost = {}
 entered = {}
-bought = {}
+bought = []
 
 Util = require "util"
 
