@@ -22,7 +22,6 @@ flatten = (array) ->
 award_hours = (msg, timename, hrs) ->
     hours[timename] ?= 0
     hours[timename] += parseInt(hrs)
-    msg.send hrs + ' Awarded To ' + timename
 
 save = (robot) ->
     robot.brain.data.hours = hours
@@ -30,6 +29,13 @@ save = (robot) ->
 module.exports = (robot) ->
     robot.brain.on 'loaded', ->
         hours = robot.brain.data.hours or {}
+
+    # Compensate for resets and dropout. Name first. 100 = 1hr
+    robot.respond /drop (.*?) (\d+)/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            award_hours(msg, msg.match[1], msg.match[2])
+            save(robot)
+            return
 
     # Give users 5 points each 3 mins which is 100/hr
     setInterval (->
