@@ -12,9 +12,9 @@
 
 points = {}
 username = {}
-tickets = {}
-raffle = {}
-cost = {}
+tickets = []
+raffle = off
+cost = 0
 entered = {}
 bought = []
 
