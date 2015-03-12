@@ -1,10 +1,13 @@
-# A basic raffle system using points system.
+# A basic raffle system using points system. You can start a raffle
+# at defined cost of points then close and draw a winner before reset.
+# Having a separate reset allows for reopening the raffle to draw again
+# without losing entrants.
 #
 # Command(s):
 #   hubot raffle start <cost> - Start a raffle at <cost> points to enter
-#   hubot raffle draw         - Close raffle, pick winner and reset.
+#   hubot raffle draw         - Close raffle, pick winner.
+#   hubot raffle reset        - Clear entrants for the next raffle.
 #   hubot ticket              - Enters raffle and takes <cost> points from entrant.
-#   hubot entrants            - A temp command for checking entrants in raffle.
 
 #
 # Author:
@@ -15,7 +18,6 @@ username = {}
 tickets = []
 raffle = off
 cost = 0
-# entered = {}
 bought = []
 
 save = (robot) ->
@@ -35,19 +37,6 @@ module.exports = (robot) ->
             return
 
     # Enter an open raffle if you have enough points
-    # robot.respond /ticket$/i, (msg) ->
-    #     username = "#{msg.envelope.user.name}"
-    #     points[username] ?= 0
-    #
-    #     if points[username] >= cost and raffle is on and entered[username] is false
-    #         entered[username] = true
-    #         points[username] -= cost
-    #         bought.push(username)
-    #         save(robot)
-    #         msg.send "Test: raffle entered."
-    #         return
-
-    # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
@@ -63,22 +52,20 @@ module.exports = (robot) ->
                 msg.send "Test: Seems you're already in the raffle."
             return
 
-    # Check entry values for testing
-    robot.respond /entry ([a-zA-Z0-9_]*)/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            username = msg.match[1].toLowerCase()
-            entry = bought.indexOf(username)
-            msg.send entry
-            return
-
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            winner = bought[Math.floor(Math.random() * bought.length)]
             raffle = off
-            # entered[username] = false
+            save(robot)
+            msg.send "And the winner is..." + winner + "! Congrats!! Masonest will contact you via Twitch message with details on collecting your prize!"
+            return
+
+    # Reset raffle. Can start another a draw including current entrants before reset.
+    robot.respond /raffle reset$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
             bought.length = 0
             save(robot)
-            msg.send "The raffle is now closed. A winner will be announced in this message once finished."
             return
 
     # Check entrants. Temp command for testing
