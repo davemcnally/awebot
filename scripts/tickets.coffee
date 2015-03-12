@@ -63,6 +63,13 @@ module.exports = (robot) ->
                 msg.send "Test: Seems you're already in the raffle."
             return
 
+    # Check entry values for testing
+    robot.respond /entry ([a-zA-Z0-9_]*)/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            username = msg.match[1].toLowerCase()
+            entry = bought.indexOf(username)
+            msg.send entry
+            return
 
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
