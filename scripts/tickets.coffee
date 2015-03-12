@@ -15,7 +15,7 @@ username = {}
 tickets = []
 raffle = off
 cost = 0
-entered = {}
+# entered = {}
 bought = []
 
 save = (robot) ->
@@ -35,12 +35,24 @@ module.exports = (robot) ->
             return
 
     # Enter an open raffle if you have enough points
+    # robot.respond /ticket$/i, (msg) ->
+    #     username = "#{msg.envelope.user.name}"
+    #     points[username] ?= 0
+    #
+    #     if points[username] >= cost and raffle is on and entered[username] is false
+    #         entered[username] = true
+    #         points[username] -= cost
+    #         bought.push(username)
+    #         save(robot)
+    #         msg.send "Test: raffle entered."
+    #         return
+
+    # Enter an open raffle if you have enough points
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
 
-        if points[username] >= cost and raffle is on and entered[username] is false
-            entered[username] = true
+        if points[username] >= cost and raffle is on
             points[username] -= cost
             bought.push(username)
             save(robot)
@@ -51,7 +63,7 @@ module.exports = (robot) ->
     robot.respond /raffle draw$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             raffle = off
-            entered[username] = false
+            # entered[username] = false
             bought.length = 0
             save(robot)
             msg.send "The raffle is now closed. A winner will be announced in this message once finished."
