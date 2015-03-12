@@ -54,7 +54,7 @@ module.exports = (robot) ->
         entry = bought.indexOf(username)
 
         if points[username] >= cost and raffle is on
-            if entry = -1
+            if entry == -1
                 points[username] -= cost
                 bought.push(username)
                 save(robot)
