@@ -51,13 +51,17 @@ module.exports = (robot) ->
     robot.respond /ticket$/i, (msg) ->
         username = "#{msg.envelope.user.name}"
         points[username] ?= 0
+        entry = bought.indexOf(username)
 
         if points[username] >= cost and raffle is on
-            points[username] -= cost
-            bought.push(username)
-            save(robot)
-            msg.send "Test: raffle entered."
-            return
+            if entry = -1
+                points[username] -= cost
+                bought.push(username)
+                save(robot)
+                msg.send "Test: raffle entered."
+            if entry >= 0
+                msg.send "Test: Seems you're already in the raffle."
+
 
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
