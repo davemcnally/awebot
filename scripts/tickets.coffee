@@ -8,7 +8,7 @@
 #   hubot raffle draw         - Close raffle, pick winner.
 #   hubot raffle reset        - Clear entrants for the next raffle.
 #   hubot ticket              - Enters raffle and takes <cost> points from entrant.
-
+#   hubot entrants            - Admin debugging command to check for entrants.
 #
 # Author:
 #   Dave McNally
@@ -47,10 +47,7 @@ module.exports = (robot) ->
                 points[username] -= cost
                 bought.push(username)
                 save(robot)
-                msg.send "Test: raffle entered."
-            else
-                msg.send "Test: Seems you're already in the raffle."
-            return
+                return
 
     # Close raffle, drawn winner and reset.
     robot.respond /raffle draw$/i, (msg) ->
@@ -68,7 +65,7 @@ module.exports = (robot) ->
             save(robot)
             return
 
-    # Check entrants. Temp command for testing
+    # Check entrants. Admin command for testing
     robot.respond /entrants$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
             tickets = [username for username in bought]
