@@ -59,8 +59,9 @@ module.exports = (robot) ->
                 bought.push(username)
                 save(robot)
                 msg.send "Test: raffle entered."
-            if entry >= 0
+            else
                 msg.send "Test: Seems you're already in the raffle."
+            return
 
 
     # Close raffle, drawn winner and reset.
