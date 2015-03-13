@@ -86,4 +86,5 @@ module.exports = (robot) ->
             ).slice(0, hourcount)
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-            msg.send "Saved hours: " + savedhours
+            # Output of savedhours is "[object Object]"
+            msg.send "Saved hours: " + watchedscores
