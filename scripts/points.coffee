@@ -23,15 +23,6 @@ Util = require "util"
 flatten = (array) ->
     Array::concat.apply([], array)
 
-# exports.flatten = flatten = (array) ->
-#     flattened = []
-#     for element in array
-#         if element instanceof Array
-#             flattened = flattened.concat flatten element
-#         else
-#             flattened.push element
-#     flattened
-
 award_points = (msg, username, pts) ->
     points[username] ?= 0
     points[username] += parseInt(pts)
@@ -99,17 +90,6 @@ module.exports = (robot) ->
         points[username] ?= 0
 
         msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
-
-    # # Test online or offline
-    # robot.respond /status$/i, (msg) ->
-    #     if robot.auth.hasRole(msg.envelope.user, ['admin'])
-    #         robot.http("https://api.twitch.tv/kraken/streams/masonest")
-    #             .get() (err, res, body) ->
-    #                 streamer = JSON.parse(body)
-    #                 if streamer.stream == null
-    #                     msg.send "The stream is offline and point rate is " + pointrate + " point per hour."
-    #                 else
-    #                     msg.send "The stream is online and point rate is " + pointrate + " points per hour."
 
     # Points are only being given to myself regardless.
     setInterval (->

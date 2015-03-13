@@ -9,8 +9,6 @@
 # Author:
 #   Derived from points.coffee by brettlangdon
 
-# _ = require "underscore"
-
 hours = {}
 timename = {}
 timepeople = {}
