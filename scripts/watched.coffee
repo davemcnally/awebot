@@ -74,34 +74,16 @@ module.exports = (robot) ->
 
         msg.send "#{msg.envelope.user.name}, you have spent " + hourstotal + " hours in the channel!"
 
-    #
-    # We don’t need the following until it's fully
-    # functional for our points system first. Just
-    # having a stat and totals is enough for now.
-    #
+    robot.respond /top hours (\d*)$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            hourcount = msg.match[1]
+            savedhours = robot.brain.get 'topwatchers'
 
-    # # Get a list of stored timepeople and hours
-    # robot.respond /gethours$/i, (msg) ->
-    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-    #         savedhours = robot.brain.get 'topwatchers'
-    #
-    #         # Outputs [object Object]
-    #         # msg.send "#{savedhours}"
-    #
-    #         # Outputs an inspection of savedhours which comes out as:
-    #         # { masonest: 3670, awebot: 3860, knexem: 3455 }
-    #         msg.send "Inspection: #{Util.inspect(savedhours)}"
+            watchedscores = [timename + " has " + hours[timename]] for timename of savedhours
 
-    # robot.respond /top hours (\d*)$/i, (msg) ->
-    #     if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-    #         hourcount = msg.match[1]
-    #         savedhours = robot.brain.get 'topwatchers'
-    #
-    #         watchedscores = [timename + " has " + hours[timename]] for timename of savedhours
-    #
-    #         hourscore = watchedscores.sort((a, b) ->
-    #             b.hours[timename] - a.hours[timename]
-    #         ).slice(0, hourcount)
-    #
-    #         # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-    #         msg.send "Top watched scores: #{hourscore}"
+            hourscore = watchedscores.sort((a, b) ->
+                b.hours[timename] - a.hours[timename]
+            ).slice(0, hourcount)
+
+            # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
+            msg.send "Saved hours: " + savedhours
