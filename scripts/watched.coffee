@@ -82,7 +82,7 @@ module.exports = (robot) ->
             # Using "for in" is for iterating over an array.
             # Using "for of" is for iterating over properties of an object.
             watchedscores = [timename + " (" + hours[timename] / 100 + " hours)"] for timename of savedhours
-            hourscore = watchedscores.slice(0)
+            hourscore = watchedscores.slice(0, hourcount)
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             # Output of savedhours is "[object Object]"
