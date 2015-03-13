@@ -9,6 +9,8 @@
 # Author:
 #   Derived from points.coffee by brettlangdon
 
+_ = require "underscore"
+
 hours = {}
 timename = {}
 timepeople = {}
@@ -85,8 +87,7 @@ module.exports = (robot) ->
             hourscore = watchedscores.slice(0, hourcount)
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-            # Output of savedhours is "[object Object]"
             msg.send "Saved hours: " + hourscore
 
             # Inspect the object savedhours
-            msg.send "Inspection: #{Util.inspect(savedhours)}"
+            # msg.send "Inspection: #{Util.inspect(savedhours)}"
