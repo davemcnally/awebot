@@ -80,19 +80,16 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             hourcount = msg.match[1]
             savedhours = robot.brain.get 'topwatchers'
+            tophours = Object.keys(savedhours).sort(topScore(savedhours))
+            topFive = tophours.map(displayScore(savedhours)).slice(0, hourcount).join(', ')
 
-            # Using "for in" is for iterating over an array.
-            # Using "for of" is for iterating over properties of an object.
-            # watchedscores = [timename + " (" + hours[timename] / 100 + " hours)"] for timename of savedhours
-            tophours = (items) ->
-                ([k, v] for k, v of items).sort (a, b) ->
-                    b[1] - a[1]
-                .slice(0, hourcount).map (n) -> n[0]
+            topScore = (list) ->
+              (a, b) ->
+                list[b] - list[a]
 
-            hourscore = tophours savedhours
+            displayScore = (list) ->
+              (user, index) ->
+                index + 1 + '. ' + user + ' (' + list[user] + ')'
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-            msg.send "Saved hours: " + hourscore
-
-            # Inspect the object savedhours
-            # msg.send "Inspection: #{Util.inspect(savedhours)}"
+            msg.send "The top " + hourcount + " people for hours watched: " + hourscore
