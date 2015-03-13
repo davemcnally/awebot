@@ -101,41 +101,42 @@ module.exports = (robot) ->
 
         msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
-    # Test online or offline
-    robot.respond /status$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            robot.http("https://api.twitch.tv/kraken/streams/masonest")
-                .get() (err, res, body) ->
-                    streamer = JSON.parse(body)
-                    if streamer.stream == null
-                        msg.send "The stream is offline and point rate is " + pointrate + " point per hour."
-                    else
-                        msg.send "The stream is online and point rate is " + pointrate + " points per hour."
+    # # Test online or offline
+    # robot.respond /status$/i, (msg) ->
+    #     if robot.auth.hasRole(msg.envelope.user, ['admin'])
+    #         robot.http("https://api.twitch.tv/kraken/streams/masonest")
+    #             .get() (err, res, body) ->
+    #                 streamer = JSON.parse(body)
+    #                 if streamer.stream == null
+    #                     msg.send "The stream is offline and point rate is " + pointrate + " point per hour."
+    #                 else
+    #                     msg.send "The stream is online and point rate is " + pointrate + " points per hour."
 
     # Points are only being given to myself regardless.
     setInterval (->
         robot.http("https://api.twitch.tv/kraken/streams/masonest")
-        .get() (err, res, body) ->
-            streamer = JSON.parse(body)
-            if streamer.stream == null
-                pointrate = 1
-            else
-                pointrate = 5
+            .get() (err, res, body) ->
+                streamer = JSON.parse(body)
+                if streamer.stream == null
+                    pointrate = 1
+                else
+                    pointrate = 5
 
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
-            chat = JSON.parse(body)
-            people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
-                p != 'awebot'
-            )
+        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
+            .get() (err, res, body) ->
+                chat = JSON.parse(body)
+                people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
+                    p != 'awebot'
+                )
 
-            for username in people
-                points[username] ?= 0
-                points[username] += pointrate
-                save(robot)
+                for username in people
+                    points[username] ?= 0
+                    points[username] += pointrate
+                    save(robot)
 
-            # Winners (and then recall) is equal to all users
-            # with points, and their points respectively.
-            robot.brain.set 'winners', points
+                # Winners (and then recall) is equal to all users
+                # with points, and their points respectively.
+                robot.brain.set 'winners', points
     ), 60000
     # 3600000 for an hour
 
