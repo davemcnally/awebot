@@ -134,8 +134,8 @@ module.exports = (robot) ->
             # Winners (and then recall) is equal to all users
             # with points, and their points respectively.
             robot.brain.set 'winners', points
-    ), 3600000
-    # 3600000 for an hour
+    ), 900000
+    # 900000 for 15 mins
 
     # Get a list of stored people and points
     robot.respond /getset$/i, (msg) ->
