@@ -114,30 +114,28 @@ module.exports = (robot) ->
 
     # Points are only being given to myself regardless.
     setInterval (->
-        robot.http("https://api.twitch.tv/kraken/streams/masonest")
-            .get() (err, res, body) ->
-                streamer = JSON.parse(body)
-                if streamer.stream == null
-                    pointrate = 1
-                else
-                    pointrate = 5
+        robot.http("https://api.twitch.tv/kraken/streams/masonest").get() (err, res, body) ->
+            streamer = JSON.parse(body)
+            if streamer.stream == null
+                pointrate = 1
+            else
+                pointrate = 5
 
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters")
-            .get() (err, res, body) ->
-                chat = JSON.parse(body)
-                people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
-                    p != 'awebot'
-                )
+        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
+            chat = JSON.parse(body)
+            people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
+                p != 'awebot'
+            )
 
-                for username in people
-                    points[username] ?= 0
-                    points[username] += pointrate
-                    save(robot)
+            for username in people
+                points[username] ?= 0
+                points[username] += pointrate
+                save(robot)
 
-                # Winners (and then recall) is equal to all users
-                # with points, and their points respectively.
-                robot.brain.set 'winners', points
-    ), 3600000
+            # Winners (and then recall) is equal to all users
+            # with points, and their points respectively.
+            robot.brain.set 'winners', points
+    ), 60000
     # 3600000 for an hour
 
     # Get a list of stored people and points
