@@ -89,7 +89,7 @@ module.exports = (robot) ->
 
             displayScore = (list) ->
               (user, index) ->
-                index + 1 + '. ' + user + ' (' + list[user] + ')'
+                index + 1 + '. ' + user + ' (' + list[user] / 100 + ')'
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             msg.send "The top " + hourcount + " people for hours watched: " + topFive
