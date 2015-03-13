@@ -79,7 +79,7 @@ module.exports = (robot) ->
             hourcount = msg.match[1]
             savedhours = robot.brain.get 'topwatchers'
 
-            watchedscores = [timename + " has " + hours[timename] / 100 + " hours watched."] for timename of savedhours
+            watchedscores = [timename + " has " + hours[timename] / 100 + " hours watched."]
 
             hourscore = watchedscores.slice(0, hourcount)
 
