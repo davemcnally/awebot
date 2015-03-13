@@ -80,8 +80,6 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             hourcount = msg.match[1]
             savedhours = robot.brain.get 'topwatchers'
-            tophours = Object.keys(savedhours).sort(topScore(savedhours))
-            topFive = tophours.map(displayScore(savedhours)).slice(0, hourcount).join(', ')
 
             topScore = (list) ->
               (a, b) ->
@@ -91,5 +89,8 @@ module.exports = (robot) ->
               (user, index) ->
                 index + 1 + '. ' + user + ' (' + list[user] / 100 + ')'
 
+            tophours = Object.keys(savedhours).sort(topScore(savedhours))
+            toppeople = tophours.map(displayScore(savedhours)).slice(0, hourcount).join(', ')
+
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-            msg.send "The top " + hourcount + " people for hours watched: " + topFive
+            msg.send "The top " + hourcount + " people for hours watched: " + toppeople
