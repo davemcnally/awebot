@@ -149,16 +149,20 @@ module.exports = (robot) ->
             # { masonest: 3670, awebot: 3860, knexem: 3455 }
             msg.send "Inspection: #{Util.inspect(recall)}"
 
-    robot.respond /top (\d*)$/i, (msg) ->
+    robot.respond /top points (\d*)$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             pointcount = msg.match[1]
             recall = robot.brain.get 'winners'
 
-            scores = [username + " has " + points[username]] for username of recall
+            pointScore = (list) ->
+              (a, b) ->
+                list[b] - list[a]
 
-            topscore = scores.sort((a, b) ->
-                b.points[username] - a.points[username]
-            ).slice(0, pointcount)
+            displaypointScore = (list) ->
+              (user, index) ->
+                index + 1 + '. ' + user + ' (' + list[user] + ')'
 
-            # msg.send "The top #{pointcount} users with the most points are: #{topscore}"
-            msg.send "Scores: #{topscore}"
+            toppoints = Object.keys(recall).sort(pointScore(recall))
+            toppeoplepoints = toppoints.map(displaypointScore(recall)).slice(0, pointcount).join(', ')
+
+            msg.send "The top " + pointcount + " people for total points: " + toppeoplepoints
