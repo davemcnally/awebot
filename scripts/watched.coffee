@@ -80,7 +80,7 @@ module.exports = (robot) ->
             savedhours = robot.brain.get 'topwatchers'
 
             watchedscores = [timename + " (" + hours[timename] / 100 + " hours)"] for timename of savedhours
-            hourscore = watchedscores.slice(0, hourcount)
+            hourscore = watchedscores.slice(0)
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             # Output of savedhours is "[object Object]"
