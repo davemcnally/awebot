@@ -79,7 +79,7 @@ module.exports = (robot) ->
             hourcount = msg.match[1]
             savedhours = robot.brain.get 'topwatchers'
 
-            watchedscores = [timename + " has " + hours[timename]] for timename of savedhours
+            watchedscores = [timename + " has " + hours[timename] / 100 + " hours watched."] for timename of savedhours
 
             hourscore = watchedscores.sort((a, b) ->
                 b.hours[timename] - a.hours[timename]
