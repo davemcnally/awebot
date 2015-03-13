@@ -92,4 +92,4 @@ module.exports = (robot) ->
                 index + 1 + '. ' + user + ' (' + list[user] + ')'
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
-            msg.send "The top " + hourcount + " people for hours watched: " + hourscore
+            msg.send "The top " + hourcount + " people for hours watched: " + topFive
