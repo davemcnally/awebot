@@ -81,10 +81,8 @@ module.exports = (robot) ->
 
             watchedscores = [timename + " has " + hours[timename] / 100 + " hours watched."] for timename of savedhours
 
-            hourscore = watchedscores.sort((a, b) ->
-                b.hours[timename] - a.hours[timename]
-            ).slice(0, hourcount)
+            hourscore = watchedscores.slice(0, hourcount)
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             # Output of savedhours is "[object Object]"
-            msg.send "Saved hours: " + watchedscores
+            msg.send "Saved hours: " + hourscore
