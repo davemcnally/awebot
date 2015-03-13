@@ -120,6 +120,7 @@ module.exports = (robot) ->
                     else
                         msg.send "The stream is online and point rate is " + pointrate + " points per hour."
 
+    # Setting increment to pointrate, only myself was getting points.
     setInterval (->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
             chat = JSON.parse(body)
@@ -129,7 +130,7 @@ module.exports = (robot) ->
 
             for username in people
                 points[username] ?= 0
-                points[username] += pointrate
+                points[username] += 1
                 save(robot)
 
             # Winners (and then recall) is equal to all users
