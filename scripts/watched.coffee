@@ -9,7 +9,7 @@
 # Author:
 #   Derived from points.coffee by brettlangdon
 
-_ = require "underscore"
+# _ = require "underscore"
 
 hours = {}
 timename = {}
@@ -83,8 +83,13 @@ module.exports = (robot) ->
 
             # Using "for in" is for iterating over an array.
             # Using "for of" is for iterating over properties of an object.
-            watchedscores = [timename + " (" + hours[timename] / 100 + " hours)"] for timename of savedhours
-            hourscore = watchedscores.slice(0, hourcount)
+            # watchedscores = [timename + " (" + hours[timename] / 100 + " hours)"] for timename of savedhours
+            tophours = (items) ->
+                ([k, v] for k, v of items).sort (a, b) ->
+                    b[1] - a[1]
+                .slice(0, hourcount).map (n) -> n[0]
+
+            hourscore = tophours savedhours
 
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             msg.send "Saved hours: " + hourscore
