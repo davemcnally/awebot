@@ -14,7 +14,7 @@ timename = {}
 timepeople = {}
 hourstotal = {}
 
-# Util = require "util"
+Util = require "util"
 
 flatten = (array) ->
     Array::concat.apply([], array)
@@ -87,3 +87,6 @@ module.exports = (robot) ->
             # msg.send "The top #{hourcount} users with the most hours are: #{hourscore}"
             # Output of savedhours is "[object Object]"
             msg.send "Saved hours: " + hourscore
+
+            # Inspect the object savedhours
+            msg.send "Inspection: #{Util.inspect(savedhours)}"
