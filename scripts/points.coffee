@@ -101,17 +101,6 @@ module.exports = (robot) ->
 
         msg.send "#{msg.envelope.user.name}, you have " + points[username] + " points!"
 
-    # Test online or offline
-    robot.respond /status$/i, (msg) ->
-        if robot.auth.hasRole(msg.envelope.user, ['admin'])
-            robot.http("https://api.twitch.tv/kraken/streams/masonest")
-                .get() (err, res, body) ->
-                    streamer = JSON.parse(body)
-                    if streamer.stream == null
-                        msg.send "The stream is offline and point rate is slower."
-                    else
-                        msg.send "The stream is online and point rate is increased."
-
     robot.http("https://api.twitch.tv/kraken/streams/masonest")
         .get() (err, res, body) ->
             streamer = JSON.parse(body)
@@ -119,6 +108,17 @@ module.exports = (robot) ->
                 pointrate = 1
             else
                 pointrate = 5
+
+    # Test online or offline
+    robot.respond /status$/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin'])
+            robot.http("https://api.twitch.tv/kraken/streams/masonest")
+                .get() (err, res, body) ->
+                    streamer = JSON.parse(body)
+                    if streamer.stream == null
+                        msg.send "The stream is offline and point rate is " + pointrate + " point per hour."
+                    else
+                        msg.send "The stream is online and point rate is " + pointrate + " points per hour."
 
     setInterval (->
         robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
@@ -135,7 +135,8 @@ module.exports = (robot) ->
             # Winners (and then recall) is equal to all users
             # with points, and their points respectively.
             robot.brain.set 'winners', points
-    ), 3600000
+    ), 60000
+    # 3600000 for an hour
 
     # Get a list of stored people and points
     robot.respond /getset$/i, (msg) ->
