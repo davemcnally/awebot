@@ -17,10 +17,10 @@ module.exports = (robot) ->
 
     robot.respond /commands$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !bot, !points, !hours, !currency and !shoutout."
+            msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !bot, !points, !hours, !uptime, !currency and !shoutout."
             return
 
-        msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !points, !hours and !bot."
+        msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !points, !hours, !uptime and !bot."
 
     robot.respond /bot$/i, (msg) ->
         msg.send "I’m Awebot. I am Masonest’s custom bot and was built by him. I’m still young and learning new things all the time."
