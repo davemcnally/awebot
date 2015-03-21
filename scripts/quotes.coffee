@@ -4,7 +4,7 @@
 # Commands:
 #   hubot quote add <quote>                - Adds the specified quote. Regulars and up only.
 #   hubot quote delete|remove <quote ID>   - Remove the specified quote. Mod and up only.
-#   hubot quote <ID>|<Regex match>         - Return a specific quote.
+#   hubot quote <ID>                       - Return a specific quote.
 #   hubot quote delete|remove all          - Removes all quotes. Admin only.
 #
 # Author:
@@ -18,7 +18,7 @@ module.exports = (robot) ->
     default_quote_database = {
         "next_id": 1,
         "quotes": [
-            {"id": 0, "quote": "Th1s1sy0urf1rstqu0te1nth3d4t4b4s3"}
+            {"id": 0, "quote": "First quote"}
         ],
         "rmquote": []
     }
@@ -65,11 +65,11 @@ module.exports = (robot) ->
                 msg.send "You need to specify a quote ID to remove."
 
     # Returns stored quotes.
-    robot.respond /quote\s?(?: (\d+)|\s(.*))?$/i, (msg) ->
+    robot.respond /quote\s?(?: (\d+))?$/i, (msg) ->
         quote_database = robot.brain.data.quote_database
 
         # Returns a random quote.
-        if not msg.match[1] and not msg.match[2]
+        if not msg.match[1]
             random_quote_index = Math.floor(Math.random() * quote_database.quotes.length)
             random_quote = quote_database.quotes[random_quote_index]
             msg.send "#{random_quote.quote} [ID: #{random_quote.id}]"
@@ -82,23 +82,6 @@ module.exports = (robot) ->
                     msg.send "#{quote_index.quote} [ID: #{quote_index.id}]"
                     return
             msg.send "The quote ID seems invalid [ID: #{msg.match[1]}]."
-
-        # Returns quote from regex match.
-        else if msg.match[2]
-            quote_found_count = 0
-            for quote_index in robot.brain.data.quote_database.quotes
-                if quote_index.quote.match new RegExp(msg.match[2])
-                    quote_found_count++
-                if quote_found_count <= maximum_quotes_output
-                    msg.send "#{quote_index.quote} [ID: #{quote_index.id}]"
-
-            if quote_found_count > maximum_quotes_output
-                excess_quote_count = quote_found_count - maximum_quotes_output
-                msg.send "There were [#{excess_quote_count}] more quotes found.  To retrieve all of these run again with quoteall.  For example: 'quoteall (F|f)oobar'."
-                return
-
-            else if quote_found_count < 1
-                msg.send "There were no matching quotes found [Pattern: #{msg.match[2]}]."
 
     robot.respond /quote (delete|remove) all$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin'])
