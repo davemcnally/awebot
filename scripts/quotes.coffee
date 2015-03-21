@@ -10,6 +10,7 @@
 #   Dave McNally
 
 quotes = []
+pick = 0
 
 save = (robot) ->
     robot.brain.data.quotes = quotes
@@ -28,3 +29,8 @@ module.exports = (robot) ->
     robot.respond /quote$/i, (msg) ->
         pulled = quotes[Math.floor(Math.random() * quotes.length)]
         msg.send '"' + pulled + '"'
+
+    # Pull a specific quote.
+    robot.respond /quote (\d+)$/i, (msg) ->
+        pick = msg.match[1]
+        msg.send quotes[pick -1]
