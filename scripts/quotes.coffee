@@ -33,4 +33,4 @@ module.exports = (robot) ->
     # Pull a specific quote.
     robot.respond /quote (\d+)$/i, (msg) ->
         pick = msg.match[1]
-        msg.send quotes[pick -1]
+        msg.send quotes[pick - 1]
