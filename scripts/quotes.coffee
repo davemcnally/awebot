@@ -46,8 +46,8 @@ module.exports = (robot) ->
                         quote = "#{msg.match[1]} #{game}"
                         robot.brain.data.quote_database.quotes.push {"id": quote_id, "quote": quote}
                         msg.send "Your quote has been added [ID: #{quote_id}]."
-                    else
-                        msg.send "The quote cannot be blank."
+            else
+                msg.send "The quote cannot be blank."
 
     # Delete a quote.
     robot.respond /quote (delete|remove)\s?(\d+)?$/i, (msg) ->
