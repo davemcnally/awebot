@@ -7,6 +7,7 @@
 #   hubot commands    - Shows a current list of commands
 #   hubot bot         - A quick bot about/introduction
 #   hubot currency    - An explanation of points and the rate.
+#   hubot blind       - A warning about spoilers and backseating.
 
 module.exports = (robot) ->
     robot.respond /schedule$/i, (msg) ->
@@ -29,3 +30,6 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
             msg.send "We use a points currency here. You get 5 points for every 15 minutes spent in the channel whilst we're live and 1 point per 15 minutes for time spent in here when offline. You can do !points to see your current balance. Points are used for our raffle system to buy entrance tickets!"
             return
+
+    robot.respond /blind$/i, (msg) ->
+        msg.send "This game is being played through for the first time. Mistakes will happen. Frequently. Please do not ruin it by posting spoilers/hints/tips of any kind."
