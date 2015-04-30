@@ -17,14 +17,14 @@ module.exports = (robot) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
 
     robot.respond /(play|platforms)$/i, (msg) ->
-        msg.send "Want to join me in game? Steam: Masonest / XBL: Masonest / PSN: MasonestTV / NNID: Masonest / 3DS Friend Code: 3797-9288-9986"
+        msg.send "Want to join Masonest in game? Steam — Masonest / XBL — Masonest / PSN — MasonestTV / NNID — Masonest / 3DS Friend Code: 3797-9288-9986"
 
     robot.respond /commands$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
-            msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !bot, !points, !hours, !uptime, !currency and !shoutout."
+            msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !play, !ctt/!tweet, !bot, !points, !hours, !uptime, !currency and !shoutout."
             return
 
-        msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !ctt/!tweet, !points, !hours, !uptime and !bot."
+        msg.send "Hey, #{msg.envelope.user.name}. Here's the commands that are available to you: !commands, !schedule, !social, !play, !ctt/!tweet, !points, !hours, !uptime and !bot."
 
     robot.respond /bot$/i, (msg) ->
         msg.send "I’m Awebot. I am Masonest’s custom bot and was built by him. I’m still young and learning new things all the time."
