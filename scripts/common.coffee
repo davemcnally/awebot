@@ -36,3 +36,6 @@ module.exports = (robot) ->
 
     robot.respond /blind$/i, (msg) ->
         msg.send "This game is being played through for the first time. Mistakes will happen. Frequently. Please do not ruin it by posting spoilers/hints/tips of any kind."
+
+    robot.respond /(donate|support)$/i, (msg) ->
+        msg.send "If you really want to, you can support the stream at https://imraising.tv/u/masonest — please know that it’s never expected or required but will always be appreciated avalonLOVE"
