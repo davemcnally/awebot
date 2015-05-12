@@ -41,4 +41,4 @@ module.exports = (robot) ->
         msg.send "If you really want to, you can support the stream at https://imraising.tv/u/masonest — please know that it’s never expected or required but will always be appreciated avalonLOVE"
 
     robot.respond /mods$/i, (msg) ->
-        msg.send "Take a look at http://bit.ly/1E3hGeu to see a current lost of the Skyrim mods we're using."
+        msg.send "Take a look at http://bit.ly/1E3hGeu to see a current list of the Skyrim mods we're using."
