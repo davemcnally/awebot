@@ -11,7 +11,7 @@
 
 module.exports = (robot) ->
     robot.respond /schedule$/i, (msg) ->
-        msg.send "Our current schedule is Monday, Wednesday & Friday from about 9am until 1pm GMT."
+        msg.send "Our current schedule is Monday, Wednesday & Friday from about 9am. Casts are usually between 2-4 hours, work and game depending."
 
     robot.respond /social$/i, (msg) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
