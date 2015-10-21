@@ -11,13 +11,13 @@
 
 module.exports = (robot) ->
     robot.respond /schedule$/i, (msg) ->
-        msg.send "Our current schedule is Monday, Wednesday & Friday from about 9am. Casts are usually between 2-4 hours, work and game depending."
+        msg.send "There's no set schedule at the moment, we're working on a new one!"
 
     robot.respond /social$/i, (msg) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
 
     robot.respond /(play|platforms)$/i, (msg) ->
-        msg.send "Want to join Masonest in game? Steam — Masonest / XBL — Masonest / PSN — MasonestTV / NNID — Masonest / 3DS Friend Code — 3797-9288-9986"
+        msg.send "Want to join Masonest in game? Steam: Masonest & PSN: MasonestTV "
 
     robot.respond /commands$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
@@ -39,6 +39,3 @@ module.exports = (robot) ->
 
     robot.respond /(donate|support)$/i, (msg) ->
         msg.send "If you really want to, you can support the stream at https://imraising.tv/u/masonest — please know that it’s never expected or required but will always be appreciated avalonLOVE"
-
-    robot.respond /mods$/i, (msg) ->
-        msg.send "Take a look at http://bit.ly/1EAT3at to see a current list of the Skyrim mods we're using."
