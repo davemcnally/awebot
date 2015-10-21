@@ -20,3 +20,18 @@ module.exports = (robot) ->
             else
                 robot.http("https://nightdev.com/hosted/uptime.php?channel=masonest").get() (err, res, body) ->
                     msg.send "We’ve been live for #{body}."
+
+    robot.hear /permit ([a-zA-Z0-9_]*)/i, (msg) ->
+        if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
+            name = msg.match[1]
+            user = robot.brain.userForName(name)
+            tempRole = "regular"
+
+            user.roles.push(tempRole)
+            msg.send "Okay, #{name} has permission for the next 2 minutes to post a link."
+
+            setTimeout () ->
+                user.roles = (role for role in user.roles when role isnt tempRole)
+            , 60 * 2000
+        else
+            msg.send "Hey #{msg.envelope.user.name}, only mods and Masonest can do that!"
