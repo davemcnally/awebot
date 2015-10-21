@@ -7,9 +7,9 @@
   "dependencies": {
     "hubot": ">=2.16.0",
     "hubot-auth": "^1.2.0",
-    "hubot-heroku-keepalive": "0.0.4",
+    "hubot-heroku-keepalive": "^1.0.0",
     "hubot-irc": "^0.2.8",
-    "hubot-redis-brain": "0.0.2",
+    "hubot-redis-brain": "0.0.3",
     "hubot-scripts": ">=2.16.2"
   },
   "engines": {
