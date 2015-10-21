@@ -1,13 +1,16 @@
-# A collection of common, simple text response
-# commands that don’t require data from elsewhere
+# Description:
+#     A collection of common, simple text response
+#     commands that don’t require data from elsewhere
 #
-# Command(s):
-#   hubot schedule    — Return the current stream schedule
-#   hubot social      — Links to Twitter and Facebook
-#   hubot commands    - Shows a current list of commands
-#   hubot bot         - A quick bot about/introduction
-#   hubot currency    - An explanation of points and the rate.
-#   hubot blind       - A warning about spoilers and backseating.
+# Commands:
+#     hubot schedule: Return the current stream schedule
+#     hubot social: Links to Twitter and Facebook
+#     hubot play || platforms: Links to current gaming platform IDs.
+#     hubot commands: Shows a current list of commands
+#     hubot bot: A quick bot about/introduction
+#     hubot currency: An explanation of points and the rate.
+#     hubot blind: A warning about spoilers and backseating.
+#     hubot donate || support: Provides a link upon request for donations.
 
 module.exports = (robot) ->
     robot.respond /schedule$/i, (msg) ->

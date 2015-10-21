@@ -1,17 +1,20 @@
-# A basic points system to build
-# points over time. Can also be manually
-# awarded.
+# Description:
+#     A basic points system to build
+#     points over time. Can also be manually
+#     awarded.
 #
-# Command(s):
-#   hubot give <number> points to <username>    - Award <number> points to <username>
-#   hubot give <username> <number> points       - Award <number> points to <username>
-#   hubot take <number> points from <username>  - Take away <number> points from <username>
-#   hubot points                                - See how many points you have
-#   hubot points <username>                     - See how many points <username> has
-#   hubot take all points from <username>       - Removes all points from <username>
+# Commands:
+#     hubot give <number> points to <username>: Award <number> points to <username>
+#     hubot give <username> <number> points: Award <number> points to <username>
+#     hubot take <number> points from <username>: Take away <number> points from <username>
+#     hubot points: See how many points you have
+#     hubot points <username>: See how many points <username> has
+#     hubot take all points from <username>: Removes all points from <username>
+#     hubot top points <number>: Show the top <number> point counts.
 #
-# Original Author:
-#   brettlangdon
+# Author:
+#     brettlangdon
+#     davemcnally
 
 points = {}
 username = {}

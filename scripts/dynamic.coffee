@@ -1,8 +1,10 @@
-# Commands that pull in dynamic info
-# from the Twitch API and possibly others
+# Description:
+#     Commands that pull in dynamic info
+#     from the Twitch API and possibly others
 #
-# Command(s):
-#   hubot shoutout    — Return the current stream schedule
+# Commands:
+#     hubot shoutout: Return the current stream schedule
+#     hubot ctt || tweet: Dynamic tweet link generated.
 
 module.exports = (robot) ->
     robot.respond /shoutout ([a-zA-Z0-9_]*)/i, (msg) ->

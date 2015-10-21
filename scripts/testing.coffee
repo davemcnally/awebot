@@ -1,7 +1,8 @@
-# Just a test script for testing custom commands
+# Commands:
+#     Just a test script for testing custom commands
 #
-# Command(s):
-#   hubot wing — outputs test response
+# Commands:
+#     hubot wing — outputs test response
 
 module.exports = (robot) ->
     robot.respond /wing$/i, (msg) ->
