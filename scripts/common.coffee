@@ -17,7 +17,7 @@ module.exports = (robot) ->
         msg.send "You can find me on Twitter at http://twitter.com/masonest_ and on Facebook at http://facebook.com/masonest"
 
     robot.respond /(play|platforms)$/i, (msg) ->
-        msg.send "Want to join Masonest in game? Steam: Masonest & PSN: MasonestTV "
+        msg.send "Want to join Masonest in game? Steam — Masonest and PSN — MasonestTV "
 
     robot.respond /commands$/i, (msg) ->
         if robot.auth.hasRole(msg.envelope.user, ['admin', 'moderator'])
