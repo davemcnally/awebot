@@ -5,12 +5,12 @@
   "author": "Dave McNally",
   "description": "A simple Twitch chat bot",
   "dependencies": {
-    "hubot": "^2.11.1",
+    "hubot": ">=2.16.0",
     "hubot-auth": "^1.2.0",
     "hubot-heroku-keepalive": "0.0.4",
-    "hubot-irc": "^0.2.7",
+    "hubot-irc": "^0.2.8",
     "hubot-redis-brain": "0.0.2",
-    "hubot-scripts": "^2.5.16"
+    "hubot-scripts": ">=2.16.2"
   },
   "engines": {
     "node": "0.10.x",
