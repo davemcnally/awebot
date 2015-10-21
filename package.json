@@ -1,19 +1,19 @@
 {
-  "name": "awebot",
-  "version": "0.0.1",
-  "private": true,
-  "author": "Dave McNally",
-  "description": "A simple Twitch chat bot",
-  "dependencies": {
+    "name": "awebot",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Dave McNally",
+    "description": "A simple Twitch chat bot",
+    "dependencies": {
     "hubot": ">=2.16.0",
     "hubot-auth": "^1.2.0",
     "hubot-heroku-keepalive": "^1.0.0",
     "hubot-irc": "^0.2.8",
     "hubot-redis-brain": "0.0.3",
     "hubot-scripts": ">=2.16.2"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": ">=1.3"
-  }
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": ">=1.3"
+    }
 }
