@@ -1,5 +1,3 @@
 [
-  "hubot-auth",
-  "hubot-heroku-keepalive",
-  "hubot-redis-brain"
+
 ]
