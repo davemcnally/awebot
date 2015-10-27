@@ -96,14 +96,14 @@ module.exports = (robot) ->
 
     # Points are only being given to myself regardless.
     setInterval (->
-        robot.http("https://api.twitch.tv/kraken/streams/masonest").get() (err, res, body) ->
+        robot.http("https://api.twitch.tv/kraken/streams/dayvemsee").get() (err, res, body) ->
             streamer = JSON.parse(body)
             if streamer.stream == null
                 pointrate = 1
             else
                 pointrate = 5
 
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
+        robot.http("https://tmi.twitch.tv/group/user/dayvemsee/chatters").get() (err, res, body) ->
             chat = JSON.parse(body)
             people = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((p) ->
                 p != 'awebot'
@@ -129,7 +129,7 @@ module.exports = (robot) ->
             # msg.send "#{recall}"
 
             # Outputs an inspection of recall which comes out as:
-            # { masonest: 3670, awebot: 3860, knexem: 3455 }
+            # { dayvemsee: 3670, awebot: 3860, knexem: 3455 }
             msg.send "Inspection: #{Util.inspect(recall)}"
 
     robot.respond /top points (\d*)$/i, (msg) ->

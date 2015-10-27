@@ -39,7 +39,7 @@ module.exports = (robot) ->
 
     # Give users 5 points each 3 mins which is 100/hr
     setInterval (->
-        robot.http("https://tmi.twitch.tv/group/user/masonest/chatters").get() (err, res, body) ->
+        robot.http("https://tmi.twitch.tv/group/user/dayvemsee/chatters").get() (err, res, body) ->
             chat = JSON.parse(body)
             timepeople = flatten([chat.chatters.moderators, chat.chatters.staff, chat.chatters.admins, chat.chatters.global_mods, chat.chatters.viewers]).filter((watchers) ->
                 watchers != 'awebot'

@@ -55,7 +55,7 @@ module.exports = (robot) ->
             winner = bought[Math.floor(Math.random() * bought.length)]
             raffle = off
             save(robot)
-            msg.send "And the winner is..." + winner + "! Congrats!! Masonest will contact you via Twitch message with details on collecting your prize!"
+            msg.send "And the winner is..." + winner + "! Congrats!! dayvemsee will contact you via Twitch message with details on collecting your prize!"
             return
 
     # Reset raffle. Can start another a draw including current entrants before reset.

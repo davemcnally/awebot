@@ -15,12 +15,12 @@ module.exports = (robot) ->
             return
 
     robot.hear /uptime$/i, (msg) ->
-        robot.http("https://api.twitch.tv/kraken/streams/masonest").get() (err, res, body) ->
+        robot.http("https://api.twitch.tv/kraken/streams/dayvemsee").get() (err, res, body) ->
             streamer = JSON.parse(body)
             if streamer.stream == null
-                msg.send "Masonest is not currently live."
+                msg.send "dayvemsee is not currently live."
             else
-                robot.http("https://nightdev.com/hosted/uptime.php?channel=masonest").get() (err, res, body) ->
+                robot.http("https://nightdev.com/hosted/uptime.php?channel=dayvemsee").get() (err, res, body) ->
                     msg.send "We’ve been live for #{body}."
 
     robot.hear /permit ([a-zA-Z0-9_]*)/i, (msg) ->
@@ -36,4 +36,4 @@ module.exports = (robot) ->
                 user.roles = (role for role in user.roles when role isnt tempRole)
             , 60 * 2000
         else
-            msg.send "Hey #{msg.envelope.user.name}, only mods and Masonest can do that!"
+            msg.send "Hey #{msg.envelope.user.name}, only mods and dayvemsee can do that!"

@@ -35,7 +35,7 @@ module.exports = (robot) ->
                         msg.send "This quote already exists [ID: #{quote_index.id}]."
                         return
                 quote_id = robot.brain.data.quote_database.next_id++
-                robot.http("https://api.twitch.tv/kraken/channels/masonest")
+                robot.http("https://api.twitch.tv/kraken/channels/dayvemsee")
                     .get() (err, res, body) ->
                         streamer = JSON.parse(body)
 
